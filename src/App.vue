@@ -51,6 +51,7 @@ export default {
   justify-content: center;
   .v-icon{
     margin: 1vw;
+    font-size: 2.5vw;
   }
 }
 
