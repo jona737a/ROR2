@@ -1,12 +1,20 @@
 <template>
     <div>
-        HEJ - THIS BE ADMIN
+        <Items></Items>
+        <Orders></Orders>
     </div>
 </template>
 
 <script>
+
+import Items from "@/components/Items.vue"
+import Orders from "@/components/Orders.vue"
+
 export default {
-    
+    components: {
+        Items,
+        Orders,
+    }
 }
 </script>
 
