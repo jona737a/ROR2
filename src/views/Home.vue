@@ -1,6 +1,7 @@
 <template>
     <div>
         HEj
+        <v-icon>alarm</v-icon>
     </div>
 </template>
 
