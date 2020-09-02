@@ -1,14 +1,18 @@
 <template>
   <v-app>
-    <v-row color="primary" height="6">
-      <v-col cols="2" offset="5">
-        <v-img src="https://www.riskofrain.com/wp-content/uploads/2019/04/ror2_logo_512-1.png" alt="logo"></v-img>
-      </v-col>
-      <v-col cols="1" offset="3" class="primary">
-        <p>admin</p>
-      </v-col>
-    </v-row>
-    <router-view></router-view>
+    <v-container fluid>
+      <v-row class="primary">
+        <v-col cols="1" class="secondary" no-gutter>
+          <p>admin</p>
+        </v-col>
+        <v-col cols="2" offset="4">
+          <v-img src="https://www.riskofrain.com/wp-content/uploads/2019/04/ror2_logo_512-1.png" alt="logo"></v-img>
+        </v-col>
+        
+      </v-row>
+      <router-view></router-view>
+      
+    </v-container>
   </v-app>
 </template>
 
@@ -17,3 +21,14 @@ export default {
   
 };
 </script>
+
+<style lang="scss" scoped>
+.container{
+  padding-top: 0;
+}
+
+
+
+
+  
+</style>
