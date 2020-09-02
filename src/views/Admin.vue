@@ -1,7 +1,6 @@
 <template>
     <div>
-        HEj
-        <v-icon>alarm</v-icon>
+        HEJ - THIS BE ADMIN
     </div>
 </template>
 
