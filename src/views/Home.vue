@@ -1,23 +1,28 @@
 <template>
-    <div>
+    <div class="main">
         <Shop></Shop>
-        <Basket></Basket>
+        <!--<Basket></Basket>-->
     </div>
 </template>
 
 <script>
 
 import Shop from "@/components/Shop.vue"
-import Basket from "@/components/Basket.vue"
+//import Basket from "@/components/Basket.vue"
 
 export default {
     components:{
       Shop,
-      Basket,
+      //Basket,
     },
 }
 </script>
 
 <style lang="scss" scoped>
+
+    .main{
+        display: flex;
+        flex-direction: row;
+    }
 
 </style>
