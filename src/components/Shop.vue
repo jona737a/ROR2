@@ -1,7 +1,7 @@
 <template>
     <v-container fluid>
         <v-row>
-            <v-col cols="7">
+            <v-col cols="10" class="mx-auto">
                 <v-row class="topBar" align="center">
                     
                         <v-btn width="5vw" height="2.5vw" id="filterButton" color="accent"> Filter </v-btn>

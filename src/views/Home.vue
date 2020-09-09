@@ -1,19 +1,23 @@
 <template>
     <div class="main">
-        <Shop></Shop>
-        <!--<Basket></Basket>-->
+        <v-col cols="8" class="pa-0">
+            <Shop></Shop>
+        </v-col>
+        <v-col cols="4" class="pa-0">
+            <Basket></Basket>
+        </v-col>
     </div>
 </template>
 
 <script>
 
 import Shop from "@/components/Shop.vue"
-//import Basket from "@/components/Basket.vue"
+import Basket from "@/components/Basket.vue"
 
 export default {
     components:{
       Shop,
-      //Basket,
+      Basket,
     },
 }
 </script>
@@ -22,7 +26,6 @@ export default {
 
     .main{
         display: flex;
-        flex-direction: row;
     }
 
 </style>
