@@ -10,7 +10,22 @@
                 </v-row>
                 <v-row class="basketList">
                     <v-simple-table>
-                        
+                        <template v-slot:default>
+                            <thead>
+                                <tr>
+                                <th class="text-left">Product</th>
+                                <th class="text-left">Amount</th>
+                                <th class="text-left">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="product in products" :key="product">
+                                <td>asd</td>
+                                <td>dsa</td>
+                                <td>fass</td>
+                                </tr>
+                            </tbody>
+                        </template>
                     </v-simple-table>
                 </v-row>
             </v-col>
@@ -20,7 +35,11 @@
 
 <script>
 export default {
-    
+    data(){
+        return{
+            products: [0,1],
+        }
+    }
 }
 </script>
 
