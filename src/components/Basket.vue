@@ -9,7 +9,9 @@
                     <v-spacer></v-spacer>
                 </v-row>
                 <v-row class="basketList">
-
+                    <v-simple-table>
+                        
+                    </v-simple-table>
                 </v-row>
             </v-col>
         </v-row>

@@ -22,66 +22,12 @@
                 </v-row>
                 <v-row class="productList">
                     
-                        <div class="product">
+                        <v-card class="product" color="tertiary" flat rounded="0" v-for="product in products" :key="product.id">
                             <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
                             <h2>Lens-Makers Glasses</h2>
                             <p>25$</p>
                             <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
-                        <div class="product">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
-                        <div class="product">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
-                        <div class="product">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
-                        <div class="product">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
-                        <div class="product">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
-                        <div class="product">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
-                        <div class="product">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
-                        <div class="product">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
-                        <div class="product">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
-                        </div>
+                        </v-card>
 
                 </v-row>
             </v-col>
@@ -91,7 +37,11 @@
 
 <script>
 export default {
-    
+    data(){
+        return{
+            products: [0,1,2,3,4,5,6,7,8,9],
+        }
+    }
 }
 </script>
 
