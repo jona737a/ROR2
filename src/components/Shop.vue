@@ -45,63 +45,63 @@ export default {
                 price: 25,
                 rarity: 'common',
                 type: 'offense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/2/23/Lens-Maker%27s_Glasses.png/revision/latest/scale-to-width-down/64?cb=20190411034902'
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/2/23/Lens-Maker%27s_Glasses.png'
             },
             {
                 name: 'Pauls Goat Hoof',
                 price: 25,
                 rarity: 'common',
                 type: 'utility',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/4/4a/Paul%27s_Goat_Hoof.png/revision/latest/scale-to-width-down/64?cb=20190411034934'
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/4/4a/Paul%27s_Goat_Hoof.png'
             },
             {
                 name: 'Hopoo Feather',
                 price: 50,
                 rarity: "uncommon",
                 type: 'utility',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/3/3a/Hopoo_Feather.png/revision/latest/scale-to-width-down/64?cb=20190411034827'
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/3/3a/Hopoo_Feather.png'
             },
             {
                 name: 'Ukulele',
                 price: 50,
                 rarity: "uncommon",
                 type: 'offense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/9/98/Ukulele.png/revision/latest/scale-to-width-down/64?cb=20190411035149'
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/9/98/Ukulele.png'
             },
             {
                 name: 'Shattering Justice',
                 price: 75,
                 rarity: 'legendary',
                 type: 'offense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/2/2d/Shattering_Justice.png/revision/latest/scale-to-width-down/64?cb=20190917165638'
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/2/2d/Shattering_Justice.png'
             },
             {
                 name: 'Ceremonial Dagger',
                 price: 75,
                 rarity: 'legendary',
                 type: 'offense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/7/76/Ceremonial_Dagger.png/revision/latest/scale-to-width-down/64?cb=20190411034354'
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/7/76/Ceremonial_Dagger.png'
             },
             {
                 name: 'Irradiant Pearl',
                 price: 100,
                 rarity: 'boss',
                 type: 'all-round',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/e/ef/Irradiant_Pearl.png/revision/latest/scale-to-width-down/64?cb=20191217214156'
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/e/ef/Irradiant_Pearl.png'
             },
             {
                 name: 'Titanic Knurl',
                 price: 100,
                 rarity: 'boss',
                 type: 'defense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/9/9f/Titanic_Knurl.png/revision/latest/scale-to-width-down/64?cb=20190411035129'
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/9/9f/Titanic_Knurl.png'
             },
             {
                 name: 'Corpsebloom',
                 price: 40,
                 rarity: 'lunar',
                 type: 'defense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/3/31/Corpsebloom.png/revision/latest/scale-to-width-down/64?cb=20190411034403'
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/3/31/Corpsebloom.png'
             },
             {
                 name: 'Bass',
