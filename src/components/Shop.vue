@@ -23,9 +23,9 @@
                 <v-row class="productList">
                     
                         <v-card class="product" color="tertiary" flat rounded="0" v-for="product in products" :key="product.id">
-                            <v-img height="6vw" width="6vw" cover src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
+                            <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
+                            <h2>{{ product.name }}</h2>
+                            <p>{{ product.price }}$</p>
                             <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
                         </v-card>
 
@@ -39,7 +39,79 @@
 export default {
     data(){
         return{
-            products: [0,1,2,3,4,5,6,7,8,9,],
+            products: [
+            {
+                name: 'Lens-Makers Glasses',
+                price: 25,
+                rarity: 'common',
+                type: 'offense',
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/2/23/Lens-Maker%27s_Glasses.png/revision/latest/scale-to-width-down/64?cb=20190411034902'
+            },
+            {
+                name: 'Pauls Goat Hoof',
+                price: 25,
+                rarity: 'common',
+                type: 'utility',
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/4/4a/Paul%27s_Goat_Hoof.png/revision/latest/scale-to-width-down/64?cb=20190411034934'
+            },
+            {
+                name: 'Hopoo Feather',
+                price: 50,
+                rarity: "uncommon",
+                type: 'utility',
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/3/3a/Hopoo_Feather.png/revision/latest/scale-to-width-down/64?cb=20190411034827'
+            },
+            {
+                name: 'Ukulele',
+                price: 50,
+                rarity: "uncommon",
+                type: 'offense',
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/9/98/Ukulele.png/revision/latest/scale-to-width-down/64?cb=20190411035149'
+            },
+            {
+                name: 'Shattering Justice',
+                price: 75,
+                rarity: 'legendary',
+                type: 'offense',
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/2/2d/Shattering_Justice.png/revision/latest/scale-to-width-down/64?cb=20190917165638'
+            },
+            {
+                name: 'Ceremonial Dagger',
+                price: 75,
+                rarity: 'legendary',
+                type: 'offense',
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/7/76/Ceremonial_Dagger.png/revision/latest/scale-to-width-down/64?cb=20190411034354'
+            },
+            {
+                name: 'Irradiant Pearl',
+                price: 100,
+                rarity: 'boss',
+                type: 'all-round',
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/e/ef/Irradiant_Pearl.png/revision/latest/scale-to-width-down/64?cb=20191217214156'
+            },
+            {
+                name: 'Titanic Knurl',
+                price: 100,
+                rarity: 'boss',
+                type: 'defense',
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/9/9f/Titanic_Knurl.png/revision/latest/scale-to-width-down/64?cb=20190411035129'
+            },
+            {
+                name: 'Corpsebloom',
+                price: 40,
+                rarity: 'lunar',
+                type: 'defense',
+                image: 'https://static.wikia.nocookie.net/riskofrain2/images/3/31/Corpsebloom.png/revision/latest/scale-to-width-down/64?cb=20190411034403'
+            },
+            {
+                name: 'Bass',
+                price: 69,
+                rarity: 'fesh',
+                type: 'wet',
+                image: 'https://www.freeiconspng.com/uploads/bass-fish-png-stripped-bass-png-11.png'
+            }
+
+            ],
         }
     }
 }
@@ -95,6 +167,7 @@ export default {
             color: map-get(map-get($colorz, blue) , text );
             font-size: 1vw;
             width: 6vw;
+            height: 3vw;
             font-weight: 400;
             align-self: center;
             text-align: center;

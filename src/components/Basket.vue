@@ -8,26 +8,30 @@
                     <h1>BASKET</h1>
                     <v-spacer></v-spacer>
                 </v-row>
-                <v-row class="basketList">
-                    <v-simple-table>
-                        <template v-slot:default>
-                            <thead>
-                                <tr>
-                                <th class="text-left">Product</th>
-                                <th class="text-left">Amount</th>
-                                <th class="text-left">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="product in products" :key="product">
-                                <td>asd</td>
-                                <td>dsa</td>
-                                <td>fass</td>
-                                </tr>
-                            </tbody>
-                        </template>
-                    </v-simple-table>
-                </v-row>
+                <v-col class="basketList pa-0">
+                    <v-row class="topBasket">
+                        <h2 class="h2_one">Amount</h2>
+                        <h2 class="h2_two">Product</h2>
+                        <h2 class="h2_three">Price</h2>
+                    </v-row>
+
+                    <v-row class="basketItems">
+                        <div class="basketAmount">
+                            <v-icon color="tertiary">remove</v-icon>
+                            <p>1</p>
+                            <v-icon color="tertiary">add</v-icon>
+                        </div>
+                        <p class="basketItemName">item</p>
+                        <v-spacer></v-spacer>
+                        <p class="basketPrice"> Price </p>
+                    </v-row>
+
+                    <v-row class="basket_footer">
+                        <h2>total price</h2>
+                        <v-btn color="secondary">CHECKOUT</v-btn>
+                    </v-row>
+
+                </v-col>
             </v-col>
         </v-row>
     </v-container>
@@ -37,7 +41,7 @@
 export default {
     data(){
         return{
-            products: [0,1],
+            
         }
     }
 }
@@ -60,6 +64,81 @@ export default {
 
     .v-icon{
         font-size: 2.5vw;
+    }
+
+    .basketItems, .topBasket, .basket_footer{
+        background-color: map-get(map-get($colorz, blue) , tertiary );
+    }
+
+    .topBasket{
+        
+        border-bottom: 0.1vw solid map-get(map-get($colorz, blue) , text );
+        
+        h2{
+            font-size: 1.2vw;
+            color: map-get(map-get($colorz, blue) , text );
+        }
+
+        .h2_one{
+            width: 30%;
+            padding-left: 1vw;
+        }
+
+        .h2_two{
+            width: 50%;
+        }
+        
+        .h2_three{
+            width: 20;
+         }
+    }
+
+    .basketItems{
+
+        padding-top: 1vw;
+
+        p{
+            font-size: 1.2vw;
+            color: map-get(map-get($colorz, blue) , text );
+        }
+
+        .basketAmount{
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            padding-left: 0.6vw;
+            width: 30%;
+
+            .v-icon{
+                font-size: 1.2vw;
+                background-color: map-get(map-get($colorz, blue) , text );
+                height: 1.2vw;
+                margin: 0.2vw 0.5vw;
+            }
+        }
+
+        .basketItemName{
+            width: 50%;
+        }
+
+        .basketPrice{
+            width: 20%;
+        }
+    }
+
+    .basket_footer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-top: 0.1vw solid map-get(map-get($colorz, blue) , text );
+        padding-bottom: 1vw;
+
+        h2{
+            font-size: 1.2vw;
+            color: map-get(map-get($colorz, blue) , text );
+            font-style: italic;
+            margin: 0.5vw 0;
+        }
     }
 
 </style>
