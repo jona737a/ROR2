@@ -11,7 +11,7 @@
         </v-col>
       </v-row>
       <router-view style="position: relative; z-index:2;"></router-view>
-       <v-img class="bg" height="100vh" fluid src="https://images.gamewatcherstatic.com/image/file/3/af/99013/ss_725d301ba2651921825d23f714a0c103877e03b3.1920x1080.jpg"></v-img>
+       <v-img style="position:fixed" class="bg" height="100vh" fluid src="https://images.gamewatcherstatic.com/image/file/3/af/99013/ss_725d301ba2651921825d23f714a0c103877e03b3.1920x1080.jpg"></v-img>
       
     </v-container>
   </v-app>
