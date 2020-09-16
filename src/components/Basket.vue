@@ -15,15 +15,15 @@
                         <h2 class="h2_three">Price</h2>
                     </v-row>
 
-                    <v-row class="basketItems">
+                    <v-row class="basketItems" v-for="(item, index) in staticBasket" :key="index">
                         <div class="basketAmount">
-                            <v-icon color="tertiary">remove</v-icon>
-                            <p>1</p>
-                            <v-icon color="tertiary">add</v-icon>
+                            <v-icon color="tertiary" @click="decreaseAtm(item)">remove</v-icon>
+                            <p>{{ item.quantity }}</p>
+                            <v-icon color="tertiary" @click="increaseAtm(item)">add</v-icon>
                         </div>
-                        <p class="basketItemName">item</p>
+                        <p class="basketItemName">{{ item.name }}</p>
                         <v-spacer></v-spacer>
-                        <p class="basketPrice"> Price </p>
+                        <p class="basketPrice"> {{ item.price }} </p>
                     </v-row>
 
                     <v-row class="basket_footer">
@@ -41,7 +41,29 @@
 export default {
     data(){
         return{
-            
+            staticBasket: [
+                {
+                name: 'Lens-Makers Glasses',
+                price: 25,
+                quantity: 1,
+            },
+            {
+                name: 'Lens-Makers Glasses',
+                price: 25,
+                quantity: 1,
+            },
+            ]
+        }
+    },
+    methods:{
+        decreaseAtm(item){
+            item.quantity--
+            if(item.quantity < 1){
+                this.staticBasket.splice(this.staticBasket.indexOf(item), 1)
+            }
+        },
+        increaseAtm(item){
+            item.quantity++
         }
     }
 }
