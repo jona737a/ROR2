@@ -17,9 +17,9 @@
 
                     <v-row class="basketItems" v-for="(item, index) in staticBasket" :key="index">
                         <div class="basketAmount">
-                            <v-icon color="tertiary" @click="decreaseAtm(item)">remove</v-icon>
+                            <v-icon color="tertiary" @click="decreaseAmt(item)">remove</v-icon>
                             <p>{{ item.quantity }}</p>
-                            <v-icon color="tertiary" @click="increaseAtm(item)">add</v-icon>
+                            <v-icon color="tertiary" @click="increaseAmt(item)">add</v-icon>
                         </div>
                         <p class="basketItemName">{{ item.name }}</p>
                         <v-spacer></v-spacer>
@@ -27,7 +27,7 @@
                     </v-row>
 
                     <v-row class="basket_footer">
-                        <h2>total price</h2>
+                        <h2>Total Price: {{ totalPrice }}$ </h2>
                         <v-btn color="secondary">CHECKOUT</v-btn>
                     </v-row>
 
@@ -56,14 +56,24 @@ export default {
         }
     },
     methods:{
-        decreaseAtm(item){
+        decreaseAmt(item){
             item.quantity--
             if(item.quantity < 1){
                 this.staticBasket.splice(this.staticBasket.indexOf(item), 1)
             }
         },
-        increaseAtm(item){
+        increaseAmt(item){
             item.quantity++
+        }
+    },
+    computed:{
+        totalPrice(){
+            var totalCost = 0;
+            for (var items in this.staticBasket) {
+                var individualItem = this.staticBasket[items];
+                totalCost += individualItem.quantity * individualItem.price;
+            }
+            return totalCost
         }
     }
 }
