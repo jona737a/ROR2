@@ -115,7 +115,16 @@ export default {
         }
     },
     methods:{
-        //addToBasket()
+        // VUEX Basket
+        addToBasket(item){
+            this.staticBasketDump.push({
+                name: item.name,
+                price: item.price,
+                quantity: 1
+            });
+            this.$store.commit('addBasketItems', this.staticBasketDump);
+            this.staticBasketDump = [];
+        }
     }
 }
 </script>
