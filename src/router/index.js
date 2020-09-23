@@ -3,8 +3,11 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Admin from '../views/Admin.vue'
 import AddItem from '../views/AddItem.vue'
+import Login from '../views/LoginPage.vue'
+
 
 Vue.use(VueRouter)
+/*eslint-disable*/
 
   const routes = [
   {
@@ -15,12 +18,27 @@ Vue.use(VueRouter)
   {
     path: '/Admin',
     name: 'Admin',
-    component: Admin
+    component: Admin,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/AddItem',
     name: 'AddItem',
-    component: AddItem
+    component: AddItem,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/Login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '*',
+    redirect: '/'
   },
 
   
@@ -33,3 +51,15 @@ const router = new VueRouter({
 })
 
 export default router
+/*
+import firebase from 'firebase'
+import 'firebase/firestore'
+
+router.beforeEach((to, from, next) =>{
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.mached.some(record => record.meta.requiresAuth);
+  
+  if (requiresAuth && !currentUser) next('Login');
+  else next();
+})
+*/
