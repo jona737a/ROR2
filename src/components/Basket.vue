@@ -41,18 +41,8 @@
 export default {
     data(){
         return{
-            staticBasket: [
-                {
-                name: 'Lens-Makers Glasses',
-                price: 25,
-                quantity: 1,
-            },
-            {
-                name: 'Lens-Makers Glasses',
-                price: 25,
-                quantity: 1,
-            },
-            ]
+            //VUEX Basket
+            staticBasketDump: [],
         }
     },
     methods:{
@@ -67,6 +57,11 @@ export default {
         }
     },
     computed:{
+        // VUEX basket
+        staticBasket(){
+           //return this.$store.state.basketItems
+           return this.$store.getters.getBasketItems
+        },
         totalPrice(){
             var totalCost = 0;
             for (var items in this.staticBasket) {
