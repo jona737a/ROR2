@@ -26,7 +26,7 @@
                             <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
                             <h2>{{ product.name }}</h2>
                             <p>{{ product.price }}$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary">Add</v-btn>
+                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary" @click="addToBasket(product)" >Add</v-btn>
                         </v-card>
 
                 </v-row>
@@ -41,6 +41,7 @@ import { dbShopAdd } from '../../firebase'
 export default {
     data(){
         return{
+            staticBasketDump: [],
             products: [
                 /*
             {
@@ -135,10 +136,10 @@ export default {
 
     methods:{
         // VUEX Basket
-        addToBasket(item){
+        addToBasket(product){
             this.staticBasketDump.push({
-                name: item.name,
-                price: item.price,
+                name: product.name,
+                price: product.price,
                 quantity: 1
             });
             this.$store.commit('addBasketItems', this.staticBasketDump);

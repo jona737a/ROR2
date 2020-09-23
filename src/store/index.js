@@ -5,29 +5,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    basketItems: [
-      {
-        name: 'Lens-Makers Glasses Test',
-        price: 25,
-        rarity: 'common',
-        type: 'offense',
-        quantity: 1,
-        //image: 'https://static.wikia.nocookie.net/riskofrain2/images/2/23/Lens-Maker%27s_Glasses.png'
-      },
-    ]
+    products: [],
   },
   mutations: {
-    addBasketItems: (state, basketItems) => {
-      if(basketItems instanceof Array) {
-        basketItems.forEach(item =>{
-          if(state.basketItems.find(itemInArray => item.name === itemInArray.name)){
-            item = state.basketItems.find(itemInArray => item.name === itemInArray.name);
-            item.quantity++;
+    addBasketItems: (state, products) => {
+      if(products instanceof Array) {
+        products.forEach(product =>{
+          if(state.products.find(itemInArray => product.name === itemInArray.name)){
+            product = state.products.find(itemInArray => product.name === itemInArray.name);
+            product.quantity++;
           }
           else {
-            state.basketItems.push({
-              name: item.name,
-              price: item.price,
+            state.products.push({
+              name: product.name,
+              price: product.price,
               quantity: 1
             });
           }
@@ -42,6 +33,6 @@ export default new Vuex.Store({
 
   },
   getters: {
-    getBasketItems: state => state.basketItems
+    getBasketItems: state => state.products
   }
 })
