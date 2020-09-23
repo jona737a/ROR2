@@ -6,7 +6,7 @@
                     
                         <v-btn width="5vw" height="2.5vw" id="filterButton" color="accent"> Filter </v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn width="5vw" height="2.5vw" id="filterButton" color="accent"> Add </v-btn>
+                        <v-btn width="5vw" height="2.5vw" id="filterButton" color="accent" to="/AddItem"> Add </v-btn>
                         <v-spacer></v-spacer>
                         <v-icon color="text">assignment</v-icon>
                         <h1>PRODUCTS</h1>
