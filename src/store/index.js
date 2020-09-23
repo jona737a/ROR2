@@ -21,7 +21,6 @@ export default new Vuex.Store({
               price: product.price,
               quantity: 1
             });
-            console.log("øf", products)
           }
         })
       }
