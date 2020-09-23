@@ -65,9 +65,7 @@ export default {
         increaseAmt(item){
             item.quantity++
         },
-        checkOut(){
-            this.staticBasket.splice(this.staticBasket.item)
-        }
+        
     },
     computed:{
         totalPrice(){

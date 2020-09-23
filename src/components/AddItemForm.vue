@@ -54,7 +54,7 @@
                         placeholder="Rarity"
                         solo
                         ></v-text-field>
-                        <v-btn color="secondary">Create Item</v-btn>
+                        <v-btn color="secondary" @click="addShopItem">Create Item</v-btn>
                     </v-col>
                 </v-row>
             </v-col>
