@@ -16,7 +16,7 @@
                     <v-col cols="10" >
                         <v-text-field
                         required
-                        label="Name of new item"
+                        label="Name"
                         v-model="nameOfItem"
                         
                         background-color="text"
@@ -34,26 +34,22 @@
                         placeholder="Price"
                         solo
                         ></v-text-field>
-                        <v-text-field
-                        required
-                        label="Type"
-                        v-model="typeOfItem"
-                        
-                        background-color="text"
-                        class="formField"
-                        placeholder="Type"
-                        solo
-                        ></v-text-field>
-                        <v-text-field
-                        required
-                        label="Rarity"
-                        v-model="rarityOfItem"
-                        
-                        background-color="text"
-                        class="formField"
-                        placeholder="Rarity"
-                        solo
-                        ></v-text-field>
+                        <v-overflow-btn  
+                            background-color="text"
+                            :items="types"
+                            label="Type"
+                            v-model="typeOfItem"
+                            class="dropdown"
+                            
+                            
+                        ></v-overflow-btn>
+                        <v-overflow-btn  
+                            background-color="text"
+                            :items="rarities"
+                            label="Rarity"
+                            v-model="rarityOfItem"
+                            class="dropdown"
+                        ></v-overflow-btn>
                         <v-btn color="secondary" @click="addShopItem">Create Item</v-btn>
                     </v-col>
                 </v-row>
@@ -62,9 +58,33 @@
     </v-container>
 </template>
 <script>
+import { dbShopAdd } from '../../firebase'
 export default {
     
+    data(){
+        return{
+            types: ['Offense', 'Utility', 'Healing', 'Equipment', 'Wet'],
+            rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Lunar', 'Fesh'],
+            nameOfItem: '',
+            priceOfItem: '',
+            typeOfItem: '',
+            rarityOfItem: '',
+
+        }
+    },
+    methods:{
+        addShopItem(){
+            dbShopAdd.add({
+                name: this.nameOfItem,
+                price: this.priceOfItem,
+                type: this.typeOfItem,
+                rarity: this.rarityOfItem,
+
+            })
+        }
+    }
 }
+
 </script>
 <style lang="scss" scoped>
 
@@ -80,11 +100,6 @@ export default {
         font-size: 2vw;
         font-weight: 400;
     }
-
-    .formField{
-
-    }
-
     .v-icon{
         font-size: 2.5vw;
     }
@@ -94,5 +109,9 @@ export default {
         display: flex;
         flex-flow: column;
         align-items: center;
+    }
+
+    .dropdown{
+        border-radius: 5px;
     }
 </style>

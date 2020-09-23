@@ -15,4 +15,4 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.firestore();
-export const dbMenuAdd = db.collection('menuItems');
+export const dbShopAdd = db.collection('shopItems');
