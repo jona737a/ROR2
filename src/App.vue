@@ -3,11 +3,15 @@
     <v-container fluid>
      <v-row class="header primary">
         <v-col class="login" cols="2" no-gutter>
-          <v-icon color="text">lock</v-icon>
-          <p class="admin">Admin</p>
+          <router-link to="/admin" class="login">
+            <v-icon color="text" >lock</v-icon>
+            <p class="admin">Admin</p>
+          </router-link>
         </v-col>
         <v-col cols="2" offset="3">
-          <v-img src="https://www.riskofrain.com/wp-content/uploads/2019/04/ror2_logo_512-1.png" alt="logo"></v-img>
+          <router-link to="/">
+            <v-img src="https://www.riskofrain.com/wp-content/uploads/2019/04/ror2_logo_512-1.png" alt="logo"></v-img>
+          </router-link>
         </v-col>
       </v-row>
       <router-view style="position: relative; z-index:2;"></router-view>
@@ -59,6 +63,7 @@ export default {
   color: map-get(map-get($colorz, blue), text );
   margin: 0;
   font-size: 2vw;
+  width: fit-content;
 }
 
   

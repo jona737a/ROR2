@@ -23,7 +23,19 @@
                                 <v-icon color="primary">delete</v-icon>
                             </v-col>
                         </v-row>
-                        
+                        <v-row class="order">
+                            <v-col cols="4"><p style="text-align:right">Order id:</p></v-col>
+                            <v-col cols="4"><p>#1</p></v-col>
+                            <v-col cols="4"><div class="progress"><p> Progress</p></div></v-col>
+                            <v-col cols="4"><p style="text-align:right">Order items:</p></v-col>
+                            <v-col cols="4">
+                                <p>1x Item 1</p>
+                                <p>3x Item 2</p>
+                            </v-col>
+                            <v-col cols="4">
+                                <v-icon color="primary">delete</v-icon>
+                            </v-col>
+                        </v-row>
                         
                         
                     </v-col>

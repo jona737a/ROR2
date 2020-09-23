@@ -28,7 +28,7 @@
 
                     <v-row class="basket_footer">
                         <h2>Total Price: {{ totalPrice }}$ </h2>
-                        <v-btn color="secondary">CHECKOUT</v-btn>
+                        <v-btn color="secondary" @click="checkOut()">CHECKOUT</v-btn>
                     </v-row>
 
                 </v-col>
@@ -54,7 +54,8 @@ export default {
         },
         increaseAmt(item){
             item.quantity++
-        }
+        },
+        
     },
     computed:{
         // VUEX basket
