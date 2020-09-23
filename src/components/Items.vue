@@ -25,9 +25,9 @@
                 <v-row class="productList">
                     
                         <v-card class="product" color="tertiary" border-color="text" flat rounded="0" v-for="product in products" :key="product.id">
-                            <v-img class="image" height="3vw" max-width="3vw" src="https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg"></v-img>
-                            <h2>Lens-Makers Glasses</h2>
-                            <p>25$</p>
+                            <v-img class="image" height="3vw" max-width="3vw" v-bind:src="product.image"></v-img>
+                            <h2>{{ product.name }}</h2>
+                            <p>{{ product.price }}$</p>
                             <v-btn class="productButton"  color="secondary">Edit</v-btn>
                             <!-- height="2vw" width="4vw" -->
                             <v-icon color="primary">delete</v-icon>
@@ -40,12 +40,29 @@
 </template>
 
 <script>
+import { dbShopAdd } from '../../firebase'
+
 export default {
     data(){
         return{
-            products: [0,1,2,3,4,5,6,7,8,9,],
+            products: [],
         }
-    }
+    },
+
+    created(){
+        dbShopAdd.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc => {
+                var shopItemData = doc.data();
+                this.products.push({
+                    id: doc.id,
+                    name: shopItemData.name,
+                    price: shopItemData.price,
+                    rarity: shopItemData.rarity,
+                    type: shopItemData.type,
+                })
+            }))
+        })
+    },
 }
 </script>
 
@@ -108,7 +125,7 @@ export default {
             width: 12vw;
             font-weight: 400;
             align-self: center;
-            text-align: center;
+            text-align: left;
         }
         .image{
             margin: auto 0;
