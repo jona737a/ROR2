@@ -36,10 +36,13 @@
 </template>
 
 <script>
+import { dbShopAdd } from '../../firebase'
+
 export default {
     data(){
         return{
             products: [
+                /*
             {
                 name: 'Lens-Makers Glasses',
                 price: 25,
@@ -110,10 +113,26 @@ export default {
                 type: 'wet',
                 image: 'https://www.freeiconspng.com/uploads/bass-fish-png-stripped-bass-png-11.png'
             }
-
+                */
             ],
         }
     },
+
+    created(){
+        dbShopAdd.get().then((querySnapshot) => {
+            querySnapshot.forEach((doc => {
+                var shopItemData = doc.data();
+                this.products.push({
+                    id: doc.id,
+                    name: shopItemData.name,
+                    price: shopItemData.price,
+                    rarity: shopItemData.rarity,
+                    type: shopItemData.type,
+                })
+            }))
+        })
+    },
+
     methods:{
         // VUEX Basket
         addToBasket(item){
