@@ -30,7 +30,7 @@
                             <p>{{ product.price }}$</p>
                             <v-btn class="productButton"  color="secondary">Edit</v-btn>
                             <!-- height="2vw" width="4vw" -->
-                            <v-icon color="primary">delete</v-icon>
+                            <v-icon color="primary" @click="deleteItem(product.id)" >delete</v-icon>
                         </v-card>
 
                 </v-row>
@@ -62,6 +62,16 @@ export default {
                 })
             }))
         })
+    },
+    methods: {
+        deleteItem(id){
+
+            dbShopAdd.doc(id).delete().then(function(){
+                //console.log("Document successfully deleted");
+            }).catch(function(/*error*/) {
+                //console.log("Error Removing Document: ", error);
+            });
+        },
     },
 }
 </script>
