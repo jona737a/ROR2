@@ -2,7 +2,7 @@
     <div class="main">
         <v-col cols="4" class="pa-0" offset="4">
             <Login></Login>
-        </v-col>s
+        </v-col>
     </div>
 </template>
 

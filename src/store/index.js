@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     currentUser: null,
+    
   },
   mutations: {
     addBasketItems: (state, products) => {
@@ -33,13 +34,17 @@ export default new Vuex.Store({
       else {
         state.currentUser = null
       }
-    }
+    },
+    
   },
   actions: {
     setUser(context, user){
       context.commit('userStatus', user)
-    }
+    },
+
+    
   },
+
   modules: {
 
   },
