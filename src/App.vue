@@ -4,9 +4,9 @@
      <v-row class="header primary pr-10">
         <v-col class="login" cols="2" no-gutter>
           <router-link to="/admin" class="login">
-            <v-icon color="text" >lock</v-icon>
+            <v-icon v-if="currentUser" color="text" >lock_open</v-icon>
+            <v-icon v-if="!currentUser" color="text" >lock</v-icon>
             <p class="admin">Admin</p>
-            <!--<p>{{ currentUser.email }}</p>-->
           </router-link>
         </v-col>
         <v-col cols="2" offset="3">
@@ -15,7 +15,10 @@
           </router-link>
         </v-col>
         <v-spacer></v-spacer>
-        <v-btn 
+        <p v-if="currentUser" class="admin">{{ currentUser.email }}</p>
+        <v-btn
+        class="ml-3"
+        v-if="currentUser" 
         color="text"
         @click="signOut()">
           Sign Out
@@ -29,20 +32,21 @@
 </template>
 
 <script>
-//import { dbShopAdd } from '../firebase'
+/*eslint-disable*/
+import { db } from '../firebase'
 
 import firebase from 'firebase'
 import 'firebase/firestore'
-//import store from '../src/store/index.js'
+import store from '../src/store/index.js'
 
-/*firebase.auth().onAuthStateChanged(function(user){
+firebase.auth().onAuthStateChanged(function(user){
   if (user){
     store.dispatch('setUser', user)
   }
   else{
     store.dispatch('setUser', null)
   }
-}); */
+}); 
 
 export default {
   methods:{
