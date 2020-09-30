@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
+    currentUser: null,
   },
   mutations: {
     addBasketItems: (state, products) => {
@@ -24,15 +25,26 @@ export default new Vuex.Store({
           }
         })
       }
+    },
+    userStatus(state, user) {
+      if (user){
+        state.currentUser = user
+      }
+      else {
+        state.currentUser = null
+      }
     }
   },
   actions: {
-
+    setUser(context, user){
+      context.commit('userStatus', user)
+    }
   },
   modules: {
 
   },
   getters: {
-    getBasketItems: state => state.products
+    getBasketItems: state => state.products,
+    currentUser: state => state.currentUser,
   }
 })

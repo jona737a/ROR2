@@ -6,6 +6,7 @@
           <router-link to="/admin" class="login">
             <v-icon color="text" >lock</v-icon>
             <p class="admin">Admin</p>
+            <!--<p>{{ currentUser.email }}</p>-->
           </router-link>
         </v-col>
         <v-col cols="2" offset="3">
@@ -28,8 +29,20 @@
 </template>
 
 <script>
+//import { dbShopAdd } from '../firebase'
+
 import firebase from 'firebase'
 import 'firebase/firestore'
+//import store from '../src/store/index.js'
+
+/*firebase.auth().onAuthStateChanged(function(user){
+  if (user){
+    store.dispatch('setUser', user)
+  }
+  else{
+    store.dispatch('setUser', null)
+  }
+}); */
 
 export default {
   methods:{
@@ -40,6 +53,11 @@ export default {
       }).catch(function(error) {
         console.log(error)
       });
+    }
+  },
+  computed: {
+    currentUser(){
+      return this.$store.getters.currentUser
     }
   }
 };
