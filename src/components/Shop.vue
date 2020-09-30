@@ -16,13 +16,14 @@
                         label="Solo"
                         placeholder="Search"
                         solo
-                        append-icon="search">
+                        append-icon="search"
+                        v-model="searchString">
                         </v-text-field>
                     
                 </v-row>
                 <v-row class="productList">
                     
-                        <v-card class="product" color="tertiary" flat rounded="0" v-for="product in products" :key="product.id">
+                        <v-card class="product" color="tertiary" flat rounded="0" v-for="product in filteredList" :key="product.id">
                             <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
                             <h2>{{ product.name }}</h2>
                             <p>{{ product.price }}$</p>
@@ -36,86 +37,17 @@
 </template>
 
 <script>
+
 import { dbShopAdd } from '../../firebase'
+
 
 export default {
     data(){
         return{
             staticBasketDump: [],
-            products: [
-                /*
-            {
-                name: 'Lens-Makers Glasses',
-                price: 25,
-                rarity: 'common',
-                type: 'offense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/2/23/Lens-Maker%27s_Glasses.png'
-            },
-            {
-                name: 'Pauls Goat Hoof',
-                price: 25,
-                rarity: 'common',
-                type: 'utility',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/4/4a/Paul%27s_Goat_Hoof.png'
-            },
-            {
-                name: 'Hopoo Feather',
-                price: 50,
-                rarity: "uncommon",
-                type: 'utility',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/3/3a/Hopoo_Feather.png'
-            },
-            {
-                name: 'Ukulele',
-                price: 50,
-                rarity: "uncommon",
-                type: 'offense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/9/98/Ukulele.png'
-            },
-            {
-                name: 'Shattering Justice',
-                price: 75,
-                rarity: 'legendary',
-                type: 'offense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/2/2d/Shattering_Justice.png'
-            },
-            {
-                name: 'Ceremonial Dagger',
-                price: 75,
-                rarity: 'legendary',
-                type: 'offense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/7/76/Ceremonial_Dagger.png'
-            },
-            {
-                name: 'Irradiant Pearl',
-                price: 100,
-                rarity: 'boss',
-                type: 'all-round',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/e/ef/Irradiant_Pearl.png'
-            },
-            {
-                name: 'Titanic Knurl',
-                price: 100,
-                rarity: 'boss',
-                type: 'defense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/9/9f/Titanic_Knurl.png'
-            },
-            {
-                name: 'Corpsebloom',
-                price: 40,
-                rarity: 'lunar',
-                type: 'defense',
-                image: 'https://static.wikia.nocookie.net/riskofrain2/images/3/31/Corpsebloom.png'
-            },
-            {
-                name: 'Bass',
-                price: 69,
-                rarity: 'fesh',
-                type: 'wet',
-                image: 'https://www.freeiconspng.com/uploads/bass-fish-png-stripped-bass-png-11.png'
-            }
-                */
-            ],
+            products: [],
+            searchString: '',
+
         }
     },
 
@@ -132,6 +64,15 @@ export default {
                 })
             }))
         })
+
+    },
+
+    computed:{
+        filteredList() {
+            return this.products.filter(product => {
+                return product.name.toLowerCase().includes(this.searchString.toLowerCase())
+        })
+    }
     },
 
     methods:{
