@@ -18,13 +18,14 @@
                         label="Solo"
                         placeholder="Search"
                         solo
-                        append-icon="search">
+                        append-icon="search"
+                        v-model="searchString">
                         </v-text-field>
                     
                 </v-row>
                 <v-row class="productList">
                     
-                        <v-card class="product" color="tertiary" border-color="text" flat rounded="0" v-for="product in shopproducts" :key="product.id">
+                        <v-card class="product" color="tertiary" border-color="text" flat rounded="0" v-for="product in filteredList" :key="product.id">
                             <v-img class="image" height="3vw" max-width="3vw" v-bind:src="product.image"></v-img>
                             <h2>{{ product.name }}</h2>
                             <p>{{ product.price }}$</p>
@@ -47,6 +48,7 @@ import 'firebase/firestore'
 export default {
     data(){
         return{
+            searchString: '',
         }
     },
 
@@ -65,6 +67,11 @@ export default {
         },
     },
     computed: {
+        filteredList() {
+            return this.shopproducts.filter(product => {
+                return product.name.toLowerCase().includes(this.searchString.toLowerCase())
+            })
+        },
         shopproducts(){
             return this.$store.getters.getProducts
         },
