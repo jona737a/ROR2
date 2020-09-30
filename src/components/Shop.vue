@@ -1,10 +1,24 @@
 <template>
     <v-container fluid>
         <v-row>
+            
+            
             <v-col cols="10" class="mx-auto">
                 <v-row class="topBar" align="center">
                     
                         <v-btn width="5vw" height="2.5vw" id="filterButton" color="accent"> Filter </v-btn>
+                        <v-dialog>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                color="primary"
+                                dark
+                                v-bind="attrs"
+                                v-on="on"
+                                >
+                                Open Dialog
+                                </v-btn>
+                            </template>
+                        </v-dialog>
                         <v-spacer></v-spacer>
                         <v-icon color="text">store</v-icon>
                         <h1>SHOP</h1>
@@ -119,6 +133,13 @@ export default {
 
     .v-icon{
         font-size: 2.5vw;
+    }
+
+    .filterBox{
+        background-color: map-get(map-get($colorz, blue) , primary );
+        width: 10vw;
+        height: 20vw;
+        position: relative;
     }
 
     .productList{
