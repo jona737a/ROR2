@@ -51,6 +51,19 @@ const router = new VueRouter({
 })
 
 export default router
+
+//Login authentication
+import { auth } from 'firebase'
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
+
+  if (requiresAuth && !auth.currentUser) {
+    next('/Login')
+  } else {
+    next()
+  }
+})
 /*
 import firebase from 'firebase'
 import 'firebase/firestore'

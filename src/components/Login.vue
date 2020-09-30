@@ -31,10 +31,10 @@
                             class="formField"
                             placeholder="Password"
                             solo
-                        > </v-text-field>
+                        >  </v-text-field>
                         <v-btn
                         color="secondary"
-                        @click.prevent="signIn()"
+                        @click="signIn()"
                         >Log In</v-btn>
                     </v-col>
                 </v-row>
@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import firebase from 'firebase'
-import 'firebase/firestore'
+//import firebase from 'firebase'
+//import 'firebase/firestore'
 
 export default {
     data(){
@@ -55,9 +55,15 @@ export default {
         }
     },
     methods:{
+
         signIn(){
+            this.$store.dispatch('login', {
+                email: this.email,
+                password: this.password
+            })
+            /*
             firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(()=>{
-                this.$router.replace('/admin')
+                this.$router.replace('/Admin')
             })
             .catch(function(error){
                 var errorCode = error.code;
@@ -68,7 +74,8 @@ export default {
                     alert (errorMessage)
                 }
                 console.log(error)
-            })
+            })*/
+
         }
     }
 }
