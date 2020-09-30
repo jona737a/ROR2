@@ -52,7 +52,7 @@
 </template>
 
 <script>
-
+/*eslint-disable*/
 import { dbShopAdd } from '../../firebase'
 
 
@@ -60,13 +60,15 @@ export default {
     data(){
         return{
             staticBasketDump: [],
-            products: [],
             searchString: '',
-
         }
     },
 
-    created(){
+    beforeCreate(){
+        this.$store.dispatch('setProducts')
+    },
+
+    /*created(){
         dbShopAdd.get().then((querySnapshot) => {
             querySnapshot.forEach((doc => {
                 var shopItemData = doc.data();
@@ -80,14 +82,17 @@ export default {
             }))
         })
 
-    },
+    },*/
 
     computed:{
         filteredList() {
-            return this.products.filter(product => {
+            return this.shopproducts.filter(product => {
                 return product.name.toLowerCase().includes(this.searchString.toLowerCase())
-        })
-    }
+            })
+        },
+        shopproducts(){
+            return this.$store.getters.getProducts
+        },
     },
 
     methods:{

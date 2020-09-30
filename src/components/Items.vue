@@ -24,7 +24,7 @@
                 </v-row>
                 <v-row class="productList">
                     
-                        <v-card class="product" color="tertiary" border-color="text" flat rounded="0" v-for="product in products" :key="product.id">
+                        <v-card class="product" color="tertiary" border-color="text" flat rounded="0" v-for="product in shopproducts" :key="product.id">
                             <v-img class="image" height="3vw" max-width="3vw" v-bind:src="product.image"></v-img>
                             <h2>{{ product.name }}</h2>
                             <p>{{ product.price }}$</p>
@@ -41,28 +41,19 @@
 
 <script>
 import { dbShopAdd } from '../../firebase'
+import 'firebase/firestore'
+
 
 export default {
     data(){
         return{
-            products: [],
         }
     },
 
-    created(){
-        dbShopAdd.get().then((querySnapshot) => {
-            querySnapshot.forEach((doc => {
-                var shopItemData = doc.data();
-                this.products.push({
-                    id: doc.id,
-                    name: shopItemData.name,
-                    price: shopItemData.price,
-                    rarity: shopItemData.rarity,
-                    type: shopItemData.type,
-                })
-            }))
-        })
+    beforeCreate(){
+        this.$store.dispatch('setProducts')
     },
+    
     methods: {
         deleteItem(id){
 
@@ -73,6 +64,11 @@ export default {
             });
         },
     },
+    computed: {
+        shopproducts(){
+            return this.$store.getters.getProducts
+        },
+    }
 }
 </script>
 
