@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
+import 'firebase/storage'
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -13,7 +14,7 @@ var firebaseConfig = {
     appId: "1:928088216643:web:2c00799188c8b427a1f0f6"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  export const  fb = firebase.initializeApp(firebaseConfig);
 
 export const db = firebase.firestore();
 export const dbShopAdd = db.collection('shopItems');

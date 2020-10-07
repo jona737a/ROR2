@@ -59,7 +59,10 @@
                             v-model="rarityOfItem"
                             class="dropdown"
                         ></v-overflow-btn>
-                        <v-btn color="secondary" @click="addShopItem">Create Item</v-btn>
+
+                        <v-file-input label="File Input" @change="uploadImage"></v-file-input>
+
+                        <v-btn :disabled="btnDisable" color="secondary" @click="addShopItem">Create Item</v-btn>
                     </v-col>
                 </v-row>
             </v-col>
@@ -67,7 +70,8 @@
     </v-container>
 </template>
 <script>
-import { dbShopAdd } from '../../firebase'
+/*eslint-disable*/
+import { dbShopAdd, fb } from '../../firebase'
 export default {
     
     data(){
@@ -79,17 +83,39 @@ export default {
             typeOfItem: '',
             rarityOfItem: '',
             addedSuccess: false,
-            addedText: "Product has been created"
-
+            addedText: "Product has been created",
+            image: null,
+            btnDisable: true,
         }
     },
     methods:{
+
+        uploadImage(e){
+            let file = e
+            //console.log(e);
+            var storageRef = fb.storage().ref('products/' + file.name);
+
+            let uploadTask = storageRef.put(file)
+
+            uploadTask.on('state_changed', (snapshot) => {
+            }, (error) => {
+
+            }, () => {
+                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    this.image = downloadURL;
+                    this.btnDisable = false;
+                    console.log('File available at', downloadURL)
+                });
+            });
+        },
+
         addShopItem(){
             dbShopAdd.add({
                 name: this.nameOfItem,
                 price: this.priceOfItem,
                 type: this.typeOfItem,
                 rarity: this.rarityOfItem,
+                image: this.image,
 
             }),
             this.addedSuccess = true;
