@@ -1,5 +1,23 @@
 <template>
     <v-container fluid>
+        <v-snackbar top color="secondary" v-model="updatedSuccess">
+            {{ updatedText }}
+            <v-btn
+            color="text"
+            text
+            @click="updatedSuccess = false">
+            Close
+            </v-btn>
+        </v-snackbar>
+        <v-snackbar top color="secondary" v-model="deletedSuccess">
+            {{ deletedText }}
+            <v-btn
+            color="text"
+            text
+            @click="deletedSuccess = false">
+            Close
+            </v-btn>
+        </v-snackbar>
         <v-row>
             <v-col cols="10" class="mx-auto">
                 <v-row class="topBar" align="center">
@@ -29,13 +47,49 @@
                             <v-img class="image" height="3vw" max-width="3vw" v-bind:src="product.image"></v-img>
                             <h2>{{ product.name }}</h2>
                             <p>{{ product.price }}$</p>
-                            <v-btn class="productButton"  color="secondary">Edit</v-btn>
-                            <!-- height="2vw" width="4vw" -->
+                            <v-btn class="productButton"  color="secondary" @click.stop="dialog = true" @click="editItem(product)">Edit</v-btn>
                             <v-icon color="primary" @click="deleteItem(product.id)" >delete</v-icon>
                         </v-card>
 
                 </v-row>
             </v-col>
+        </v-row>
+        <v-row>
+            <v-dialog v-model="dialog" max-width="500">
+                <v-card>
+                    <v-row class="editItemForm">
+                        <v-col cols="10" >
+                            <v-text-field
+                            v-model="product.name"
+                            background-color="text"
+                            class="formField"
+                            solo
+                            ></v-text-field>
+                            <v-text-field
+                            v-model="product.price"
+                            background-color="text"
+                            class="formField"
+                            solo
+                            ></v-text-field>
+                            <v-overflow-btn  
+                                background-color="text"
+                                v-model="product.type"
+                                class="dropdown"
+                                :items="types"
+                            >
+                            </v-overflow-btn>
+                            <v-overflow-btn  
+                                background-color="text"
+                                v-model="product.rarity"
+                                class="dropdown"
+                                :items="rarities"
+                            ></v-overflow-btn>
+                            <v-btn color="secondary" @click="updateItem()" @click.stop="dialog = false">Edit Item</v-btn>
+                            <v-btn color="secondary" @click.stop="dialog = false">Cancel</v-btn>
+                        </v-col>
+                    </v-row>
+                </v-card>
+            </v-dialog>
         </v-row>
     </v-container>
 </template>
@@ -49,6 +103,15 @@ export default {
     data(){
         return{
             searchString: '',
+            dialog: false,
+            product: [],
+            types: ['Offense', 'Utility', 'Healing', 'Equipment', 'Wet'],
+            rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Lunar', 'Fesh'],
+            activeEditItem: null,
+            updatedSuccess: false,
+            updatedText: "Product has been updated",
+            deletedSuccess: false,
+            deletedText: "Product has been deleted",
         }
     },
 
@@ -57,10 +120,24 @@ export default {
     },
     
     methods: {
+        editItem(product){
+            this.product = product
+            this.activeEditItem = product.id
+        },
+        updateItem(){
+            dbShopAdd.doc(this.activeEditItem).update(this.product).then(() => {
+                //console.log("Success");
+                this.updatedSuccess = true;
+            })
+            .catch(function(/*error*/){
+                //console.log("Error", error)
+            });
+        },
         deleteItem(id){
 
-            dbShopAdd.doc(id).delete().then(function(){
+            dbShopAdd.doc(id).delete().then(()=>{
                 //console.log("Document successfully deleted");
+                this.deletedSuccess = true;
             }).catch(function(/*error*/) {
                 //console.log("Error Removing Document: ", error);
             });
@@ -155,6 +232,16 @@ export default {
         .productButton{
             margin: auto 0;
         }
+    }
+    .editItemForm{
+        background-color: map-get(map-get($colorz, blue) , tertiary );
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+
+    .dropdown{
+        border-radius: 5px;
     }
 
 </style>

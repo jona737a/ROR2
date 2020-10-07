@@ -1,5 +1,14 @@
 <template>
     <v-container fluid>
+        <v-snackbar top color="secondary" v-model="addedSuccess">
+            {{ addedText }}
+            <v-btn
+            color="text"
+            text
+            @click="addedSuccess = false">
+            Close
+            </v-btn>
+        </v-snackbar>
         <v-row>
             <v-col>
                  <v-row class="topBar" align="center">
@@ -69,6 +78,8 @@ export default {
             priceOfItem: '',
             typeOfItem: '',
             rarityOfItem: '',
+            addedSuccess: false,
+            addedText: "Product has been created"
 
         }
     },
@@ -80,7 +91,8 @@ export default {
                 type: this.typeOfItem,
                 rarity: this.rarityOfItem,
 
-            })
+            }),
+            this.addedSuccess = true;
         }
     }
 }
