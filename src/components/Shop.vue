@@ -6,19 +6,79 @@
             <v-col cols="10" class="mx-auto">
                 <v-row class="topBar" align="center">
                     
-                        <v-btn width="5vw" height="2.5vw" id="filterButton" color="accent"> Filter </v-btn>
-                        <v-dialog>
+                        
+                        <v-dialog
+                        v-model="dialog"
+                        max-width="500">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn
-                                color="primary"
-                                dark
+                                <v-btn width="5vw" 
+                                height="2.5vw" 
+                                id="filterButton"
+                                color="accent" 
                                 v-bind="attrs"
-                                v-on="on"
-                                >
-                                Open Dialog
+                                v-on="on">
+                                Filter
                                 </v-btn>
                                 
                             </template>
+                            <v-card
+                            color="tertiary">
+                                <v-card-title class="headline">
+                                Filter items
+                                </v-card-title>
+                                <div class="filters">
+                                   
+                                    <div class="checkFilter" v-for="(types, index) in shopproducts" :key="index">
+                                        <v-checkbox 
+                                            v-model="filter"
+                                            :label="types.type"
+                                            :value="types.type"
+                                            dense
+                                            dark
+                                            
+                                            class="pl-4 py-0"
+                                        ></v-checkbox>
+                                    </div>
+
+                                   <!--
+                                   
+                                    <div class="checkFilter" >
+                                        <v-checkbox 
+                                            v-model="this.type"
+                                            :label="'hello'"
+                                        ></v-checkbox>
+                                    </div>
+
+
+                                    <div class="checkFilter">
+                                        <v-checkbox 
+                                            v-model="checkbox"
+                                            :label="'Checkbox 1:'"
+                                        ></v-checkbox>
+                                    </div>
+                                    -->
+                                </div>
+                                
+                                
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn
+                                            color="primary"
+                                            @click="filterOnType()"
+                                        
+                                        >
+                                            Filter
+                                        </v-btn>
+                                        <v-btn
+                                            color="secondary"
+                                            dark
+                                            @click="dialog = false, filter = []"
+                                        >
+                                            Disable
+                                        </v-btn>
+                                    </v-card-actions>
+                                
+                            </v-card>
                         </v-dialog>
                         <v-spacer></v-spacer>
                         <v-icon color="text">store</v-icon>
@@ -45,7 +105,21 @@
                             <v-btn class="productButton" height="2vw" width="2vw" color="secondary" @click="addToBasket(product)" >Add</v-btn>
                         </v-card>
 
+
                 </v-row>
+
+     <v-row class="productList">
+                    
+                        <v-card class="product" color="tertiary" flat rounded="0" v-for="product in filteredType" :key="product.id">
+                            <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
+                            <h2>{{ product.name }}</h2>
+                            <p>{{ product.price }}$</p>
+                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary" @click="addToBasket(product)" >Add</v-btn>
+                        </v-card>
+
+
+                </v-row>
+
             </v-col>
         </v-row>
     </v-container>
@@ -59,8 +133,11 @@ import { dbShopAdd } from '../../firebase'
 export default {
     data(){
         return{
+            filter: [],
             staticBasketDump: [],
             searchString: '',
+            dialog: false,
+            
         }
     },
 
@@ -87,15 +164,38 @@ export default {
     computed:{
         filteredList() {
             return this.shopproducts.filter(product => {
+                
                 return product.name.toLowerCase().includes(this.searchString.toLowerCase())
             })
         },
+     
         shopproducts(){
             return this.$store.getters.getProducts
         },
+        filteredType() {
+             return this.shopproducts.filter(product => product.type.includes(this.filter))
+
+
+           //this.shopproducts.filter(product => product.type == this.filter )
+            
+          //return this.shopproducts.filter(product => product.type == "Healing" )
+         
+         //return this.shopproducts.filter(product => {
+         //       return product.type.toLowerCase().includes(this.searchString.toLowerCase())
+            },
+       
+        
     },
 
     methods:{
+
+        filterOnType() {
+            
+            console.log("test", this.filter)
+            console.log("test", this.shopproducts.filter(product => product.type == this.filter ))
+            this.dialog = false
+        },
+        
         // VUEX Basket
         addToBasket(product){
             this.staticBasketDump.push({
@@ -141,12 +241,20 @@ export default {
         font-size: 2.5vw;
     }
 
-    .filterBox{
-        background-color: map-get(map-get($colorz, blue) , primary );
-        width: 10vw;
-        height: 20vw;
-        position: relative;
+    .headline{
+        color: map-get(map-get($colorz,blue), text);
     }
+
+    .filters{
+        display: flex;
+        flex-flow: column;
+    }
+
+    .checkFilter{
+        width: 50%;
+        
+    }
+
 
     .productList{
         background-color: map-get(map-get($colorz, blue) , tertiary );
