@@ -19,6 +19,13 @@ export default new Vuex.Store({
     rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Equipment', 'Lunar', 'Fesh'],
   },
   mutations: {
+    addCheckoutItem:(state, products) => {
+      dbOrders.add({
+        orderNumber: 2,
+        progress: "not started",
+        orderLines: state.products
+      })
+    },
     addBasketItems: (state, products) => {
       if(products instanceof Array) {
         products.forEach(product =>{
@@ -72,14 +79,12 @@ export default new Vuex.Store({
       dbOrders.onSnapshot((snapshotProducts) =>{
         orderItems = []
         snapshotProducts.forEach((doc) => {
-          var shopItemData = doc.data();
+          var orderItemData = doc.data();
           orderItems.push({
             id: doc.id,
-            name: orderItemData.name,
-            price: orderItemData.price,
-            rarity: orderItemData.rarity,
-            type: orderItemData.type,
-            image: orderItemData.image,
+            orderNumber: orderItemData.orderNumber,
+            progress: orderItemData.progress,
+            orderLines: orderItemData.orderLines,
           })
         })
        

@@ -67,7 +67,7 @@ export default {
         },
     },
     computed:{
-        // VUEX basket
+        
         staticBasket(){
            //return this.$store.state.basketItems
            return this.$store.getters.getBasketItems
