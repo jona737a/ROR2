@@ -2,7 +2,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { dbShopAdd } from '../../firebase'
+import { dbShopAdd,dbOrders } from '../../firebase'
 
 import firebase from 'firebase'
 import 'firebase/firestore'
@@ -14,8 +14,9 @@ export default new Vuex.Store({
     products: [],
     currentUser: null,
     shopproducts: [],
-    types: ['Offense', 'Utility', 'Healing', 'Equipment', 'Wet'],
-    rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Lunar', 'Fesh'],
+    orderItems:[],
+    types: ['Offense', 'Utility', 'Healing',  'Wet'],
+    rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Equipment', 'Lunar', 'Fesh'],
   },
   mutations: {
     addBasketItems: (state, products) => {
@@ -65,14 +66,42 @@ export default new Vuex.Store({
       }
       )
     },
+    setOrderItems: state => {
+      let orderItems = []
+
+      dbOrders.onSnapshot((snapshotProducts) =>{
+        orderItems = []
+        snapshotProducts.forEach((doc) => {
+          var shopItemData = doc.data();
+          orderItems.push({
+            id: doc.id,
+            name: orderItemData.name,
+            price: orderItemData.price,
+            rarity: orderItemData.rarity,
+            type: orderItemData.type,
+            image: orderItemData.image,
+          })
+        })
+       
+        state.orderItems = orderItems
+      }
+      )
+    },
     
   },
   actions: {
+    setCheckoutItems(context){
+      context.commit('addCheckoutItem')
+    },
+
     setUser(context, user){
       context.commit('userStatus', user)
     },
     setProducts: context => {
       context.commit('setProducts')
+    },
+    setOrderItems: context => {
+      context.commit('setOrderItems')
     }
   },
 
@@ -85,5 +114,6 @@ export default new Vuex.Store({
     getProducts: state => state.shopproducts,
     getTypes: state => state.types,
     getRarities: state => state.rarities,
+    getOrderItems: state => state.orderItems,
   }
 })

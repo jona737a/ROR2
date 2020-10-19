@@ -45,6 +45,11 @@ export default {
             staticBasketDump: [],
         }
     },
+
+    beforeCreate(){
+        this.$store.dispatch('setOrderItems')
+    },
+
     methods:{
         decreaseAmt(item){
             item.quantity--
@@ -56,6 +61,10 @@ export default {
             item.quantity++
         },
         
+
+        checkOut(){
+            this.$store.dispatch('setCheckoutItems')
+        },
     },
     computed:{
         // VUEX basket
