@@ -22,7 +22,77 @@
             <v-col cols="10" class="mx-auto">
                 <v-row class="topBar" align="center">
                     
-                        <v-btn width="5vw" height="2.5vw" id="filterButton" color="accent"> Filter </v-btn>
+                        <v-dialog
+                        v-model="dialog"
+                        max-width="500">
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn width="5vw" 
+                                height="2.5vw" 
+                                id="filterButton"
+                                color="accent" 
+                                v-bind="attrs"
+                                v-on="on">
+                                Filter
+                                </v-btn>
+                                
+                            </template>
+                            <v-card
+                            color="tertiary">
+                                <v-card-title class="headline">
+                                Filter items
+                                </v-card-title>
+                                <div class="filters">
+                                    <div class="checkfilter">
+                                        <h3>Types</h3>
+                                        <div class="check" v-for="(type, index) in types" :key="index">
+                                            <v-checkbox 
+                                                v-model="filterType"
+                                                :label="type"
+                                                :value="type"
+                                                dense
+                                                dark
+                                                
+                                                class="pl-4 py-0"
+                                            ></v-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="checkfilter">
+                                        <h3>Rarities</h3>
+                                        <div class="check" v-for="(rarity, index) in rarities" :key="index">
+                                            <v-checkbox 
+                                                v-model="filterRarity"
+                                                :label="rarity"
+                                                :value="rarity"
+                                                dense
+                                                dark
+                                                
+                                                class="pl-4 py-0"
+                                            ></v-checkbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn
+                                            color="primary"
+                                            @click="filterOnType()"
+                                        
+                                        >
+                                            Filter
+                                        </v-btn>
+                                        <v-btn
+                                            color="secondary"
+                                            dark
+                                            @click="dialog = false, filterType = [], filterRarity = []"
+                                        >
+                                            Disable
+                                        </v-btn>
+                                    </v-card-actions>
+                                
+                            </v-card>
+                        </v-dialog>
                         <v-spacer></v-spacer>
                         <v-btn width="5vw" height="2.5vw" id="filterButton" color="accent" to="/AddItem"> Add </v-btn>
                         <v-spacer></v-spacer>
@@ -43,11 +113,11 @@
                 </v-row>
                 <v-row class="productList">
                     
-                        <v-card class="product" color="tertiary" border-color="text" flat rounded="0" v-for="product in filteredList" :key="product.id">
+                        <v-card class="product" color="tertiary" border-color="text" flat rounded="0" v-for="product in filteredRarity" :key="product.id">
                             <v-img class="image" height="3vw" max-width="3vw" v-bind:src="product.image"></v-img>
                             <h2>{{ product.name }}</h2>
                             <p>{{ product.price }}$</p>
-                            <v-btn class="productButton"  color="secondary" @click.stop="dialog = true" @click="editItem(product)">Edit</v-btn>
+                            <v-btn class="productButton"  color="secondary" @click.stop="dialogEdit = true" @click="editItem(product)">Edit</v-btn>
                             <v-icon color="primary" @click="deleteItem(product.id)" >delete</v-icon>
                         </v-card>
 
@@ -55,7 +125,7 @@
             </v-col>
         </v-row>
         <v-row>
-            <v-dialog v-model="dialog" max-width="500">
+            <v-dialog v-model="dialogEdit" max-width="500">
                 <v-card>
                     <v-row class="editItemForm">
                         <v-col cols="10" >
@@ -85,9 +155,9 @@
                                 :items="rarities"
                             ></v-overflow-btn>
                             <v-row>
-                            <v-btn color="secondary" @click="updateItem()" @click.stop="dialog = false">Edit Item</v-btn>
+                            <v-btn color="secondary" @click="updateItem()" @click.stop="dialogEdit = false">Edit Item</v-btn>
                             <v-spacer />
-                            <v-btn color="secondary" @click.stop="dialog = false">Cancel</v-btn>
+                            <v-btn color="secondary" @click.stop="dialogEdit = false">Cancel</v-btn>
                             </v-row>
                         </v-col>
                     </v-row>
@@ -107,7 +177,10 @@ export default {
         return{
             searchString: '',
             dialog: false,
+            dialogEdit: false,
             product: [],
+            filterType: [],
+            filterRarity: [],
             activeEditItem: null,
             updatedSuccess: false,
             updatedText: "Product has been updated",
@@ -143,6 +216,12 @@ export default {
                 //console.log("Error Removing Document: ", error);
             });
         },
+        filterOnType() {
+            
+            console.log("test", this.filter)
+            console.log("test", this.shopproducts.filter(product => product.type == this.filter ))
+            this.dialog = false
+        },
     },
     computed: {
         types(){
@@ -151,14 +230,22 @@ export default {
         rarities(){
             return this.$store.getters.getRarities
         },
-
+        shopproducts(){
+            return this.$store.getters.getProducts
+        },
         filteredList() {
             return this.shopproducts.filter(product => {
+                
                 return product.name.toLowerCase().includes(this.searchString.toLowerCase())
             })
         },
-        shopproducts(){
-            return this.$store.getters.getProducts
+     
+        filteredType() {
+             return this.filteredList.filter(product => product.type.includes(this.filterType))
+        },
+
+        filteredRarity() {
+             return this.filteredType.filter(product => product.rarity.includes(this.filterRarity))
         },
     }
 }
@@ -204,6 +291,21 @@ export default {
             border: none;
         }
     }
+
+    .filters{
+        display: flex;
+        justify-content: space-evenly;
+        padding-right: 50px;
+    }
+
+    .checkFilter{
+        width: 250px;
+        
+    }
+
+    h3{
+            color: map-get(map-get($colorz, blue), text );
+        }
 
     .v-application .tertiary{
         border-color:map-get(map-get($colorz, blue), text) !important;

@@ -27,29 +27,33 @@
                                 Filter items
                                 </v-card-title>
                                 <div class="filters">
-                                   
-                                    <div class="checkFilter" v-for="(type, index) in types" :key="index">
-                                        <v-checkbox 
-                                            v-model="filter"
-                                            :label="type"
-                                            :value="type"
-                                            dense
-                                            dark
-                                            
-                                            class="pl-4 py-0"
-                                        ></v-checkbox>
+                                    <div class="checkfilter">
+                                        <h3>Types</h3>
+                                        <div class="check" v-for="(type, index) in types" :key="index">
+                                            <v-checkbox 
+                                                v-model="filterType"
+                                                :label="type"
+                                                :value="type"
+                                                dense
+                                                dark
+                                                
+                                                class="pl-4 py-0"
+                                            ></v-checkbox>
+                                        </div>
                                     </div>
-
-                                   <div class="checkFilter" v-for="(rarity, index) in rarities" :key="index">
-                                        <v-checkbox 
-                                            v-model="filter"
-                                            :label="rarity"
-                                            :value="rarity"
-                                            dense
-                                            dark
-                                            
-                                            class="pl-4 py-0"
-                                        ></v-checkbox>
+                                    <div class="checkfilter">
+                                        <h3>Rarities</h3>
+                                        <div class="check" v-for="(rarity, index) in rarities" :key="index">
+                                            <v-checkbox 
+                                                v-model="filterRarity"
+                                                :label="rarity"
+                                                :value="rarity"
+                                                dense
+                                                dark
+                                                
+                                                class="pl-4 py-0"
+                                            ></v-checkbox>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -66,7 +70,7 @@
                                         <v-btn
                                             color="secondary"
                                             dark
-                                            @click="dialog = false, filter = []"
+                                            @click="dialog = false, filterType = [], filterRarity = []"
                                         >
                                             Disable
                                         </v-btn>
@@ -92,7 +96,7 @@
                 </v-row>
                 <v-row class="productList">
                     
-                        <v-card class="product" color="tertiary" flat rounded="0" v-for="product in filteredType" :key="product.id">
+                        <v-card class="product" color="tertiary" flat rounded="0" v-for="product in filteredRarity" :key="product.id">
                             <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
                             <h2>{{ product.name }}</h2>
                             <p>{{ product.price }}$</p>
@@ -127,7 +131,8 @@ import { dbShopAdd } from '../../firebase'
 export default {
     data(){
         return{
-            filter: [],
+            filterType: [],
+            filterRarity: [],
             staticBasketDump: [],
             searchString: '',
             dialog: false,
@@ -175,7 +180,11 @@ export default {
         },
      
         filteredType() {
-             return this.filteredList.filter(product => product.type.includes(this.filter))
+             return this.filteredList.filter(product => product.type.includes(this.filterType))
+        },
+
+        filteredRarity() {
+             return this.filteredType.filter(product => product.rarity.includes(this.filterRarity))
         },
        
         
@@ -241,15 +250,18 @@ export default {
 
     .filters{
         display: flex;
-        flex-flow: column;
+        justify-content: space-evenly;
+        padding-right: 50px;
     }
 
     .checkFilter{
-        width: 50%;
+        width: 250px;
         
     }
 
-
+    h3{
+            color: map-get(map-get($colorz, blue), text );
+        }
     .productList{
         background-color: map-get(map-get($colorz, blue) , tertiary );
         display: flex;
