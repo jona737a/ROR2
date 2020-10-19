@@ -57,6 +57,7 @@ export default new Vuex.Store({
             price: shopItemData.price,
             rarity: shopItemData.rarity,
             type: shopItemData.type,
+            image: shopItemData.image,
           })
         })
        
