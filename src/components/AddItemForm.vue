@@ -76,8 +76,6 @@ export default {
     
     data(){
         return{
-            types: ['Offense', 'Utility', 'Healing', 'Equipment', 'Wet'],
-            rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Lunar', 'Fesh'],
             nameOfItem: '',
             priceOfItem: '',
             typeOfItem: '',
@@ -120,6 +118,15 @@ export default {
             }),
             this.addedSuccess = true;
         }
+    },
+
+    computed:{
+        types(){
+            return this.$store.getters.getTypes
+        },
+        rarities(){
+            return this.$store.getters.getRarities
+        },
     }
 }
 

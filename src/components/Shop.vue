@@ -28,11 +28,11 @@
                                 </v-card-title>
                                 <div class="filters">
                                    
-                                    <div class="checkFilter" v-for="(types, index) in shopproducts" :key="index">
+                                    <div class="checkFilter" v-for="(type, index) in types" :key="index">
                                         <v-checkbox 
                                             v-model="filter"
-                                            :label="types.type"
-                                            :value="types.type"
+                                            :label="type"
+                                            :value="type"
                                             dense
                                             dark
                                             
@@ -40,23 +40,17 @@
                                         ></v-checkbox>
                                     </div>
 
-                                   <!--
-                                   
-                                    <div class="checkFilter" >
+                                   <div class="checkFilter" v-for="(rarity, index) in rarities" :key="index">
                                         <v-checkbox 
-                                            v-model="this.type"
-                                            :label="'hello'"
+                                            v-model="filter"
+                                            :label="rarity"
+                                            :value="rarity"
+                                            dense
+                                            dark
+                                            
+                                            class="pl-4 py-0"
                                         ></v-checkbox>
                                     </div>
-
-
-                                    <div class="checkFilter">
-                                        <v-checkbox 
-                                            v-model="checkbox"
-                                            :label="'Checkbox 1:'"
-                                        ></v-checkbox>
-                                    </div>
-                                    -->
                                 </div>
                                 
                                 
@@ -98,18 +92,6 @@
                 </v-row>
                 <v-row class="productList">
                     
-                        <v-card class="product" color="tertiary" flat rounded="0" v-for="product in filteredList" :key="product.id">
-                            <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
-                            <h2>{{ product.name }}</h2>
-                            <p>{{ product.price }}$</p>
-                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary" @click="addToBasket(product)" >Add</v-btn>
-                        </v-card>
-
-
-                </v-row>
-
-     <v-row class="productList">
-                    
                         <v-card class="product" color="tertiary" flat rounded="0" v-for="product in filteredType" :key="product.id">
                             <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
                             <h2>{{ product.name }}</h2>
@@ -119,6 +101,18 @@
 
 
                 </v-row>
+
+     <!--<v-row class="productList">
+                    
+                        <v-card class="product" color="tertiary" flat rounded="0" v-for="product in filteredType" :key="product.id">
+                            <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
+                            <h2>{{ product.name }}</h2>
+                            <p>{{ product.price }}$</p>
+                            <v-btn class="productButton" height="2vw" width="2vw" color="secondary" @click="addToBasket(product)" >Add</v-btn>
+                        </v-card>
+
+
+                </v-row>-->
 
             </v-col>
         </v-row>
@@ -162,6 +156,17 @@ export default {
     },*/
 
     computed:{
+        types(){
+            return this.$store.getters.getTypes
+        },
+        rarities(){
+            return this.$store.getters.getRarities
+        },
+
+        shopproducts(){
+            return this.$store.getters.getProducts
+        },
+
         filteredList() {
             return this.shopproducts.filter(product => {
                 
@@ -169,20 +174,9 @@ export default {
             })
         },
      
-        shopproducts(){
-            return this.$store.getters.getProducts
-        },
         filteredType() {
-             return this.shopproducts.filter(product => product.type.includes(this.filter))
-
-
-           //this.shopproducts.filter(product => product.type == this.filter )
-            
-          //return this.shopproducts.filter(product => product.type == "Healing" )
-         
-         //return this.shopproducts.filter(product => {
-         //       return product.type.toLowerCase().includes(this.searchString.toLowerCase())
-            },
+             return this.filteredList.filter(product => product.type.includes(this.filter))
+        },
        
         
     },

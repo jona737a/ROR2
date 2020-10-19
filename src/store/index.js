@@ -13,7 +13,9 @@ export default new Vuex.Store({
   state: {
     products: [],
     currentUser: null,
-    shopproducts: []
+    shopproducts: [],
+    types: ['Offense', 'Utility', 'Healing', 'Equipment', 'Wet'],
+    rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Lunar', 'Fesh'],
   },
   mutations: {
     addBasketItems: (state, products) => {
@@ -80,5 +82,7 @@ export default new Vuex.Store({
     getBasketItems: state => state.products,
     currentUser: state => state.currentUser,
     getProducts: state => state.shopproducts,
+    getTypes: state => state.types,
+    getRarities: state => state.rarities,
   }
 })

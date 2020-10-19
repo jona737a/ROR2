@@ -84,8 +84,11 @@
                                 class="dropdown"
                                 :items="rarities"
                             ></v-overflow-btn>
+                            <v-row>
                             <v-btn color="secondary" @click="updateItem()" @click.stop="dialog = false">Edit Item</v-btn>
+                            <v-spacer />
                             <v-btn color="secondary" @click.stop="dialog = false">Cancel</v-btn>
+                            </v-row>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -105,8 +108,6 @@ export default {
             searchString: '',
             dialog: false,
             product: [],
-            types: ['Offense', 'Utility', 'Healing', 'Equipment', 'Wet'],
-            rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Lunar', 'Fesh'],
             activeEditItem: null,
             updatedSuccess: false,
             updatedText: "Product has been updated",
@@ -144,6 +145,13 @@ export default {
         },
     },
     computed: {
+        types(){
+            return this.$store.getters.getTypes
+        },
+        rarities(){
+            return this.$store.getters.getRarities
+        },
+
         filteredList() {
             return this.shopproducts.filter(product => {
                 return product.name.toLowerCase().includes(this.searchString.toLowerCase())
