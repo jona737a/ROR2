@@ -111,7 +111,7 @@
                         </v-text-field>
                     
                 </v-row>
-                <v-row class="productList">
+                <v-row class="productList overflow-y-auto">
                     
                         <v-card class="product" color="tertiary" border-color="text" flat rounded="0" v-for="product in filteredRarity" :key="product.id">
                             <v-img class="image" height="3vw" max-width="3vw" v-bind:src="product.image"></v-img>
@@ -287,6 +287,7 @@ export default {
         display: flex;
         flex-flow: column;
         align-items: center;
+        max-height: 69vh;
         :last-child{
             border: none;
         }
@@ -318,6 +319,7 @@ export default {
         height: 5vw;
         margin: 0;
         border-bottom: solid 0.2vw ;
+        padding: 1vw 0;
         
         h2{
             color: map-get(map-get($colorz, blue) , text );

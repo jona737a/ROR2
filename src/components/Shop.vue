@@ -94,7 +94,7 @@
                         </v-text-field>
                     
                 </v-row>
-                <v-row class="productList">
+                <v-row class="productList overflow-y-auto" >
                     
                         <v-card class="product" color="tertiary" flat rounded="0" v-for="product in filteredRarity" :key="product.id">
                             <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
@@ -267,6 +267,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        max-height: 69vh;
     }
 
     .product{
