@@ -11,17 +11,17 @@
         </v-snackbar>
         <v-row>
             <v-col>
-                 <v-row class="topBar" align="center">
+                 <v-row class="topBar secondary" align="center">
                     
                         
                         <v-spacer></v-spacer>
                         <v-icon color="text">note_add</v-icon>
-                        <h1>Add New Item</h1>
+                        <h1 class="text--text">Add New Item</h1>
                         <v-spacer></v-spacer>
                         
                     
                 </v-row>
-                <v-row class="addItemForm">
+                <v-row class="addItemForm tertiary">
                     <v-col cols="10" >
                         <v-text-field
                         required
@@ -134,14 +134,12 @@ export default {
 <style lang="scss" scoped>
 
     .topBar{
-        background-color: map-get(map-get($colorz, blue) , secondary );
         padding: 0 1vw;
         border-bottom: 0.2vw solid map-get(map-get($colorz, blue) , text );
         height: 4vw;
     }
 
     .topBar h1{
-        color: map-get(map-get($colorz, blue) , text );
         font-size: 2vw;
         font-weight: 400;
     }
@@ -150,7 +148,6 @@ export default {
     }
 
     .addItemForm{
-        background-color: map-get(map-get($colorz, blue) , tertiary );
         display: flex;
         flex-flow: column;
         align-items: center;

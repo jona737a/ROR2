@@ -20,7 +20,7 @@
         </v-snackbar>
         <v-row>
             <v-col cols="10" class="mx-auto">
-                <v-row class="topBar" align="center">
+                <v-row class="topBar secondary" align="center">
                     
                         <v-dialog
                         v-model="dialog"
@@ -38,12 +38,12 @@
                             </template>
                             <v-card
                             color="tertiary">
-                                <v-card-title class="headline">
+                                <v-card-title class="headline text--text">
                                 Filter items
                                 </v-card-title>
                                 <div class="filters">
                                     <div class="checkfilter">
-                                        <h3>Types</h3>
+                                        <h3 class="text--text">Types</h3>
                                         <div class="check" v-for="(type, index) in types" :key="index">
                                             <v-checkbox 
                                                 v-model="filterType"
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     <div class="checkfilter">
-                                        <h3>Rarities</h3>
+                                        <h3 class="text--text">Rarities</h3>
                                         <div class="check" v-for="(rarity, index) in rarities" :key="index">
                                             <v-checkbox 
                                                 v-model="filterRarity"
@@ -97,7 +97,7 @@
                         <v-btn width="5vw" height="2.5vw" id="filterButton" color="accent" to="/AddItem"> Add </v-btn>
                         <v-spacer></v-spacer>
                         <v-icon color="text">assignment</v-icon>
-                        <h1>PRODUCTS</h1>
+                        <h1 class="text--text">PRODUCTS</h1>
                         <v-spacer></v-spacer>
                         <v-text-field
                         dense
@@ -111,12 +111,12 @@
                         </v-text-field>
                     
                 </v-row>
-                <v-row class="productList overflow-y-auto">
+                <v-row class="productList overflow-y-auto tertiary">
                     
                         <v-card class="product" color="tertiary" border-color="text" flat rounded="0" v-for="product in filteredRarity" :key="product.id">
                             <v-img class="image" height="3vw" max-width="3vw" v-bind:src="product.image"></v-img>
-                            <h2>{{ product.name }}</h2>
-                            <p>{{ product.price }}$</p>
+                            <h2 class="text--text">{{ product.name }}</h2>
+                            <p class="text--text">{{ product.price }}$</p>
                             <v-btn class="productButton"  color="secondary" @click.stop="dialogEdit = true" @click="editItem(product)">Edit</v-btn>
                             <v-icon color="primary" @click="deleteItem(product.id)" >delete</v-icon>
                         </v-card>
@@ -127,7 +127,7 @@
         <v-row>
             <v-dialog v-model="dialogEdit" max-width="500">
                 <v-card>
-                    <v-row class="editItemForm">
+                    <v-row class="editItemForm tertiary">
                         <v-col cols="10" >
                             <v-text-field
                             v-model="product.name"
@@ -263,14 +263,12 @@ export default {
 <style lang="scss" scoped>
 
     .topBar{
-        background-color: map-get(map-get($colorz, blue) , secondary );
         padding: 0 1vw;
         border-bottom: 0.2vw solid map-get(map-get($colorz, blue) , text );
         height: 4vw;
     }
 
     .topBar h1{
-        color: map-get(map-get($colorz, blue) , text );
         font-size: 2vw;
         font-weight: 400;
     }
@@ -284,7 +282,6 @@ export default {
     }
 
     .productList{
-        background-color: map-get(map-get($colorz, blue) , tertiary );
         display: flex;
         flex-flow: column;
         align-items: center;
@@ -305,10 +302,6 @@ export default {
         
     }
 
-    h3{
-            color: map-get(map-get($colorz, blue), text );
-        }
-
     .v-application .tertiary{
         border-color:map-get(map-get($colorz, blue), text) !important;
     }
@@ -323,7 +316,6 @@ export default {
         padding: 1vw 0;
         
         h2{
-            color: map-get(map-get($colorz, blue) , text );
             font-size: 1vw;
             width: 12vw;
             font-weight: 400;
@@ -334,7 +326,6 @@ export default {
             margin: auto 0;
         }
         p{
-            color: map-get(map-get($colorz, blue) , text );
             font-size: 1.2vw;
             width: 7vw;
             font-style: italic;
@@ -347,7 +338,6 @@ export default {
         }
     }
     .editItemForm{
-        background-color: map-get(map-get($colorz, blue) , tertiary );
         display: flex;
         flex-flow: column;
         align-items: center;

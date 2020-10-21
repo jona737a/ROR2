@@ -12,7 +12,7 @@
                         
                     
                 </v-row>
-                <v-row class="pa-10 login">
+                <v-row class="pa-10 login tertiary">
                     <v-col>
                         <v-text-field
                         required

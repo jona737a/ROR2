@@ -11,21 +11,21 @@
         </v-snackbar>
         <v-row>
             <v-col cols="10" class="mx-auto">
-                <v-row class="topBar" align="center">
+                <v-row class="topBar secondary" align="center">
                     <v-spacer></v-spacer>
                     <v-icon color="text">receipt_long</v-icon>
-                    <h1>ORDERS</h1>
+                    <h1 class="text--text">ORDERS</h1>
                     <v-spacer></v-spacer>
                 </v-row>
                 <v-row >
-                    <v-col class="orderlist">
+                    <v-col class="orderlist tertiary">
                         <v-row class="order" v-for="order in orderItems" :key="order.id">
-                            <v-col cols="4"><p style="text-align:right">Order Number:</p></v-col>
-                            <v-col cols="4"><p>{{order.orderNumber}}</p></v-col>
-                            <v-col cols="4"><div class="progress"><p>{{order.progress}}</p></div></v-col>
-                            <v-col cols="4"><p style="text-align:right">Order items:</p></v-col>
+                            <v-col cols="4"><p class="text--text" style="text-align:right">Order Number:</p></v-col>
+                            <v-col cols="4"><p class="text--text">{{order.orderNumber}}</p></v-col>
+                            <v-col cols="4"><div class="progress secondary"><p class="text--text">{{order.progress}}</p></div></v-col>
+                            <v-col cols="4"><p class="text--text" style="text-align:right">Order items:</p></v-col>
                             <v-col cols="4">
-                                <p v-for="(item, index) in order.orderLines" :key="index">{{item.quantity}} x {{item.name}}</p>
+                                <p class="text--text" v-for="(item, index) in order.orderLines" :key="index">{{item.quantity}} x {{item.name}}</p>
                                 
                             </v-col>
                             <v-col cols="4" >
@@ -73,14 +73,12 @@ export default {
 
 <style lang="scss" scoped>
     .topBar{
-        background-color: map-get(map-get($colorz, blue) , secondary );
         padding: 0 1vw;
         border-bottom: 0.2vw solid map-get(map-get($colorz, blue) , text );
         height: 4vw;
     }
 
     .topBar h1{
-        color: map-get(map-get($colorz, blue) , text );
         font-size: 2vw;
         font-weight: 400;
     }
@@ -90,16 +88,13 @@ export default {
     }
     
     .orderlist{
-        background-color: map-get(map-get($colorz,blue), tertiary );
         
         .order{
             border-bottom: 0.2vw solid map-get(map-get($colorz,blue), text );
             p{
                 width: 100%;
-                color: map-get(map-get($colorz,blue), text );
             }
             .progress{
-                background-color: map-get(map-get($colorz, blue), secondary);
                 padding: 0.5vw;
                 p{
                     text-align: center;
