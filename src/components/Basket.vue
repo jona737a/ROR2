@@ -1,5 +1,14 @@
 <template>
     <v-container fluid>
+        <v-snackbar top color="secondary" v-model="checkoutSuccess">
+            {{ checkoutText }}
+            <v-btn
+            color="text"
+            text
+            @click="checkoutSuccess = false">
+            Close
+            </v-btn>
+        </v-snackbar>
         <v-row>
             <v-col cols="10" class="mx-auto">
                 <v-row class="topBar" align="center">
@@ -43,6 +52,8 @@ export default {
         return{
             //VUEX Basket
             staticBasketDump: [],
+            checkoutSuccess: false,
+            checkoutText: "Checkout complete",
         }
     },
 
@@ -64,6 +75,8 @@ export default {
 
         checkOut(){
             this.$store.dispatch('setCheckoutItems')
+            this.staticBasket.splice(this.staticBasket)
+            this.checkoutSuccess = true;
         },
     },
     computed:{

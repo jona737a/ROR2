@@ -28,8 +28,8 @@
                                 <p v-for="(item, index) in order.orderLines" :key="index">{{item.quantity}} x {{item.name}}</p>
                                 
                             </v-col>
-                            <v-col cols="4" @click="deleteOrder(order.id)">
-                                <v-icon color="primary">delete</v-icon>
+                            <v-col cols="4" >
+                                <v-icon @click="deleteOrder(order.id)" color="primary">delete</v-icon>
                             </v-col>
                         </v-row>
                         

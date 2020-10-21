@@ -233,6 +233,7 @@ export default {
         shopproducts(){
             return this.$store.getters.getProducts
         },
+
         filteredList() {
             return this.shopproducts.filter(product => {
                 
