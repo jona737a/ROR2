@@ -6,7 +6,7 @@
           <router-link to="/admin" class="login">
             <v-icon v-if="currentUser" color="text" >lock_open</v-icon>
             <v-icon v-if="!currentUser" color="text" >lock</v-icon>
-            <p class="admin">Admin</p>
+            <p class="text--text admin">Admin</p>
           </router-link>
         </v-col>
 
@@ -37,7 +37,7 @@
           </router-link>
         </v-col>
         <v-spacer></v-spacer>
-        <p v-if="currentUser" class="admin">{{ currentUser.email }}</p>
+        <p v-if="currentUser" class="text--text admin">{{ currentUser.email }}</p>
         <v-btn
         class="ml-3"
         v-if="currentUser" 
@@ -98,7 +98,7 @@ export default {
         this.$vuetify.theme.themes.light.text = '#ADD0E4',
         this.$vuetify.theme.themes.light.accent = '#4B74AC',
         this.currentBackground = 'https://images.gamewatcherstatic.com/image/file/3/af/99013/ss_725d301ba2651921825d23f714a0c103877e03b3.1920x1080.jpg',
-
+        
         this.currentColor = 'blue';
       }
     },
@@ -177,7 +177,6 @@ export default {
 }
 
 .admin{
-  color: map-get(map-get($colorz, blue), text );
   margin: 0;
   font-size: 2vw;
   width: fit-content;

@@ -2,12 +2,12 @@
     <v-container>
         <v-row>
             <v-col cols="12">
-                <v-row class="topBar" align="center">
+                <v-row class="topBar secondary" align="center">
                     
                         
                         <v-spacer></v-spacer>
                         <v-icon color="text">lock</v-icon>
-                        <h1>Login</h1>
+                        <h1 class="text--text">Login</h1>
                         <v-spacer></v-spacer>
                         
                     

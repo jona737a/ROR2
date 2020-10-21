@@ -4,7 +4,7 @@
             
             
             <v-col cols="10" class="mx-auto">
-                <v-row class="topBar" align="center">
+                <v-row class="secondary text--border topBar" align="center">
                     
                         
                         <v-dialog
@@ -23,12 +23,12 @@
                             </template>
                             <v-card
                             color="tertiary">
-                                <v-card-title class="headline">
+                                <v-card-title class="headline text--text">
                                 Filter items
                                 </v-card-title>
                                 <div class="filters">
                                     <div class="checkfilter">
-                                        <h3>Types</h3>
+                                        <h3 class="text--text">Types</h3>
                                         <div class="check" v-for="(type, index) in types" :key="index">
                                             <v-checkbox 
                                                 v-model="filterType"
@@ -42,7 +42,7 @@
                                         </div>
                                     </div>
                                     <div class="checkfilter">
-                                        <h3>Rarities</h3>
+                                        <h3 class="text--text">Rarities</h3>
                                         <div class="check" v-for="(rarity, index) in rarities" :key="index">
                                             <v-checkbox 
                                                 v-model="filterRarity"
@@ -80,7 +80,7 @@
                         </v-dialog>
                         <v-spacer></v-spacer>
                         <v-icon color="text">store</v-icon>
-                        <h1>SHOP</h1>
+                        <h1 class="text--text">SHOP</h1>
                         <v-spacer></v-spacer>
                         <v-text-field
                         dense
@@ -94,12 +94,12 @@
                         </v-text-field>
                     
                 </v-row>
-                <v-row class="productList overflow-y-auto" >
+                <v-row class="productList overflow-y-auto tertiary" >
                     
                         <v-card class="product" color="tertiary" flat rounded="0" v-for="product in filteredRarity" :key="product.id">
                             <v-img  max-height="6vw" min-height="6vw" width="6vw" cover v-bind:src="product.image"></v-img>
-                            <h2>{{ product.name }}</h2>
-                            <p>{{ product.price }}$</p>
+                            <h2 class="text--text">{{ product.name }}</h2>
+                            <p class="text--text">{{ product.price }}$</p>
                             <v-btn class="productButton" height="2vw" width="2vw" color="secondary" @click="addToBasket(product)" >Add</v-btn>
                         </v-card>
 
@@ -224,14 +224,12 @@ export default {
 <style lang="scss" scoped>
 
     .topBar{
-        background-color: map-get(map-get($colorz, blue) , secondary );
         padding: 0 1vw;
         border-bottom: 0.2vw solid map-get(map-get($colorz, blue) , text );
         height: 4vw;
     }
 
     .topBar h1{
-        color: map-get(map-get($colorz, blue) , text );
         font-size: 2vw;
         font-weight: 400;
     }
@@ -242,10 +240,6 @@ export default {
 
     .v-icon{
         font-size: 2.5vw;
-    }
-
-    .headline{
-        color: map-get(map-get($colorz,blue), text);
     }
 
     .filters{
@@ -259,11 +253,7 @@ export default {
         
     }
 
-    h3{
-            color: map-get(map-get($colorz, blue), text );
-        }
     .productList{
-        background-color: map-get(map-get($colorz, blue) , tertiary );
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -279,7 +269,6 @@ export default {
         margin: 1vw 2vw;
 
         h2{
-            color: map-get(map-get($colorz, blue) , text );
             font-size: 1vw;
             width: 6vw;
             height: 3vw;
@@ -288,7 +277,6 @@ export default {
             text-align: center;
         }
         p{
-            color: map-get(map-get($colorz, blue) , text );
             font-size: 1.2vw;
             width: 6vw;
             font-style: italic;

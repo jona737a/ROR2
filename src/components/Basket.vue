@@ -11,32 +11,32 @@
         </v-snackbar>
         <v-row>
             <v-col cols="10" class="mx-auto">
-                <v-row class="topBar" align="center">
+                <v-row class="topBar secondary" align="center">
                     <v-spacer></v-spacer>
                     <v-icon color="text">shopping_cart</v-icon>
-                    <h1>BASKET</h1>
+                    <h1 class="text--text">BASKET</h1>
                     <v-spacer></v-spacer>
                 </v-row>
                 <v-col class="basketList pa-0">
-                    <v-row class="topBasket">
-                        <h2 class="h2_one">Amount</h2>
-                        <h2 class="h2_two">Product</h2>
-                        <h2 class="h2_three">Price</h2>
+                    <v-row class="topBasket tertiary">
+                        <h2 class="h2_one text--text">Amount</h2>
+                        <h2 class="h2_two text--text">Product</h2>
+                        <h2 class="h2_three text--text">Price</h2>
                     </v-row>
 
-                    <v-row class="basketItems" v-for="(item, index) in staticBasket" :key="index">
+                    <v-row class="basketItems tertiary" v-for="(item, index) in staticBasket" :key="index">
                         <div class="basketAmount">
-                            <v-icon color="tertiary" @click="decreaseAmt(item)">remove</v-icon>
-                            <p>{{ item.quantity }}</p>
-                            <v-icon color="tertiary" @click="increaseAmt(item)">add</v-icon>
+                            <v-icon color="tertiary--text" @click="decreaseAmt(item)">remove</v-icon>
+                            <p class="text--text">{{ item.quantity }}</p>
+                            <v-icon color="tertiary--text" @click="increaseAmt(item)">add</v-icon>
                         </div>
-                        <p class="basketItemName">{{ item.name }}</p>
+                        <p class="basketItemName text--text">{{ item.name }}</p>
                         <v-spacer></v-spacer>
-                        <p class="basketPrice"> {{ item.price }} </p>
+                        <p class="basketPrice text--text"> {{ item.price }} </p>
                     </v-row>
 
-                    <v-row class="basket_footer">
-                        <h2>Total Price: {{ totalPrice }}$ </h2>
+                    <v-row class="basket_footer tertiary">
+                        <h2 class="text--text">Total Price: {{ totalPrice }}$ </h2>
                         <v-btn color="secondary" @click="checkOut()">CHECKOUT</v-btn>
                     </v-row>
 
@@ -100,14 +100,12 @@ export default {
 <style lang="scss" scoped>
 
 .topBar{
-        background-color: map-get(map-get($colorz, blue) , secondary );
         padding: 0 1vw;
         border-bottom: 0.2vw solid map-get(map-get($colorz, blue) , text );
         height: 4vw;
     }
 
     .topBar h1{
-        color: map-get(map-get($colorz, blue) , text );
         font-size: 2vw;
         font-weight: 400;
     }
@@ -116,17 +114,12 @@ export default {
         font-size: 2.5vw;
     }
 
-    .basketItems, .topBasket, .basket_footer{
-        background-color: map-get(map-get($colorz, blue) , tertiary );
-    }
-
     .topBasket{
         
         border-bottom: 0.1vw solid map-get(map-get($colorz, blue) , text );
         
         h2{
             font-size: 1.2vw;
-            color: map-get(map-get($colorz, blue) , text );
         }
 
         .h2_one{
@@ -149,7 +142,6 @@ export default {
 
         p{
             font-size: 1.2vw;
-            color: map-get(map-get($colorz, blue) , text );
         }
 
         .basketAmount{
@@ -185,7 +177,6 @@ export default {
 
         h2{
             font-size: 1.2vw;
-            color: map-get(map-get($colorz, blue) , text );
             font-style: italic;
             margin: 0.5vw 0;
         }
