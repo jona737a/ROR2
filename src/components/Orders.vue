@@ -17,11 +17,11 @@
                     <h1 class="text--text">ORDERS</h1>
                     <v-spacer></v-spacer>
                 </v-row>
-                <v-row >
+                <v-row>
                     <v-col class="orderlist tertiary">
                         <v-row class="order" v-for="order in orderItems" :key="order.id">
                             <v-col cols="4"><p class="text--text" style="text-align:right">Order Number:</p></v-col>
-                            <v-col cols="4"><p class="text--text">{{order.orderNumber}}</p></v-col>
+                            <v-col cols="4"><p class="text--text">{{orderCounter}}</p></v-col>
                             <v-col cols="4"><div class="progress secondary"><p class="text--text">{{order.progress}}</p></div></v-col>
                             <v-col cols="4"><p class="text--text" style="text-align:right">Order items:</p></v-col>
                             <v-col cols="4">
@@ -53,9 +53,16 @@ export default {
             deletedText: "Order has been deleted",
         }
     },
+    beforeCreate(){
+        this.$store.dispatch('setOrderCounter')
+    },
     computed:{
         orderItems(){
            return this.$store.getters.getOrderItems
+        },
+        orderCounter(){
+             
+           return this.$store.getters.getOrderCounter
         },
     },
     methods:{
@@ -63,6 +70,7 @@ export default {
             dbOrders.doc(id).delete().then(()=>{
                 //console.log("Document successfully deleted");
                 this.deletedSuccess = true;
+                
             }).catch(function(/*error*/) {
                 //console.log("Error Removing Document: ", error);
             });

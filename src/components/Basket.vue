@@ -85,6 +85,9 @@ export default {
            //return this.$store.state.basketItems
            return this.$store.getters.getBasketItems
         },
+
+        
+        
         totalPrice(){
             var totalCost = 0;
             for (var items in this.staticBasket) {

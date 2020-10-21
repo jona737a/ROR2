@@ -19,5 +19,6 @@ var firebaseConfig = {
 export const db = firebase.firestore();
 export const dbShopAdd = db.collection('shopItems');
 export const dbOrders = db.collection('orders');
+export const dbCounter = db.collection('Counter');
 
 export const usersCollection = db.collection('users')

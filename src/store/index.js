@@ -2,7 +2,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { dbShopAdd,dbOrders } from '../../firebase'
+import { dbShopAdd,dbOrders,dbCounter } from '../../firebase'
 
 import firebase from 'firebase'
 import 'firebase/firestore'
@@ -15,11 +15,12 @@ export default new Vuex.Store({
     currentUser: null,
     shopproducts: [],
     orderItems:[],
+    orderCounter: '',
     types: ['Offense', 'Utility', 'Healing',  'Wet'],
     rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Equipment', 'Lunar', 'Fesh'],
   },
   mutations: {
-    addCheckoutItem:(state, products) => {
+    addCheckoutItem:(state, products, orderCounter) => {
       dbOrders.add({
         orderNumber: 2,
         progress: "not started",
@@ -69,6 +70,7 @@ export default new Vuex.Store({
           })
         })
        
+        
         state.shopproducts = shopproducts
       }
       )
@@ -92,13 +94,30 @@ export default new Vuex.Store({
       }
       )
     },
+    setOrderCounter: state => {
+      let orderCounter = []
+
+      dbCounter.onSnapshot((snapshotProducts) =>{
+        orderCounter = []
+        snapshotProducts.forEach((doc) => {
+          var orderNumber = doc.data();
+          orderCounter.push({
+            id: doc.id,
+            orderCounter: orderNumber,
+          })
+         
+        })
+        console.log(orderCounter)
+        state.orderCounter = orderCounter
+      }
+      )
+    },
     
   },
   actions: {
     setCheckoutItems(context){
       context.commit('addCheckoutItem')
     },
-
     setUser(context, user){
       context.commit('userStatus', user)
     },
@@ -107,7 +126,10 @@ export default new Vuex.Store({
     },
     setOrderItems: context => {
       context.commit('setOrderItems')
-    }
+    },
+    setOrderCounter: context => {
+      context.commit('setOrderCounter')
+    },
   },
 
   modules: {
@@ -120,5 +142,6 @@ export default new Vuex.Store({
     getTypes: state => state.types,
     getRarities: state => state.rarities,
     getOrderItems: state => state.orderItems,
+    getOrderCounter: state => state.orderCounter,
   }
 })
