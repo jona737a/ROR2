@@ -72,10 +72,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    
+    .v-application .secondary {
+    border-color: var(--v-text-base) !important;
+    }
+    
     .topBar{
         padding: 0 1vw;
         border-bottom: 0.2vw solid map-get(map-get($colorz, blue) , text );
         height: 4vw;
+        border-bottom: 0.2vw solid var(--v-text-base);
+        border-color: var(--v-text-base) !important;
     }
 
     .topBar h1{
@@ -90,7 +97,8 @@ export default {
     .orderlist{
         
         .order{
-            border-bottom: 0.2vw solid map-get(map-get($colorz,blue), text );
+            border-bottom: 0.2vw solid var(--v-text-base);
+            border-color: var(--v-text-base) !important;
             p{
                 width: 100%;
             }

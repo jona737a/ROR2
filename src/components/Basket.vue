@@ -99,9 +99,18 @@ export default {
 
 <style lang="scss" scoped>
 
+.v-application .secondary {
+    border-color: var(--v-text-base) !important;
+    }
+
+.v-application .tertiary {
+    border-color: var(--v-text-base) !important;
+    }
+
 .topBar{
         padding: 0 1vw;
-        border-bottom: 0.2vw solid map-get(map-get($colorz, blue) , text );
+        border-bottom: 0.2vw solid var(--v-text-base);
+        border-color: var(--v-text-base) !important;
         height: 4vw;
     }
 
@@ -116,7 +125,8 @@ export default {
 
     .topBasket{
         
-        border-bottom: 0.1vw solid map-get(map-get($colorz, blue) , text );
+        border-bottom: 0.1vw solid var(--v-text-base);
+        border-color: var(--v-text-base) !important;
         
         h2{
             font-size: 1.2vw;
@@ -153,7 +163,7 @@ export default {
 
             .v-icon{
                 font-size: 1.2vw;
-                background-color: map-get(map-get($colorz, blue) , text );
+                background-color: var(--v-text-base) !important;
                 height: 1.2vw;
                 margin: 0.2vw 0.5vw;
             }
@@ -172,7 +182,8 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: center;
-        border-top: 0.1vw solid map-get(map-get($colorz, blue) , text );
+        border-top: 0.1vw solid var(--v-text-base);
+        border-color: var(--v-text-base) !important;
         padding-bottom: 1vw;
 
         h2{
