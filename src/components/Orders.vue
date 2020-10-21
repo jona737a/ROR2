@@ -21,7 +21,7 @@
                     <v-col class="orderlist tertiary">
                         <v-row class="order" v-for="order in orderItems" :key="order.id">
                             <v-col cols="4"><p class="text--text" style="text-align:right">Order Number:</p></v-col>
-                            <v-col cols="4"><p class="text--text">{{orderCounter}}</p></v-col>
+                            <v-col cols="4"><p class="text--text">{{order.orderNumber}}</p></v-col>
                             <v-col cols="4"><div class="progress secondary"><p class="text--text">{{order.progress}}</p></div></v-col>
                             <v-col cols="4"><p class="text--text" style="text-align:right">Order items:</p></v-col>
                             <v-col cols="4">
@@ -32,6 +32,7 @@
                                 <v-icon @click="deleteOrder(order.id)" color="primary">delete</v-icon>
                             </v-col>
                         </v-row>
+                        
                         
                         
                     </v-col>
@@ -60,7 +61,7 @@ export default {
         orderItems(){
            return this.$store.getters.getOrderItems
         },
-        orderCounter(){
+        counter(){
              
            return this.$store.getters.getOrderCounter
         },

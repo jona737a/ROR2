@@ -15,14 +15,14 @@ export default new Vuex.Store({
     currentUser: null,
     shopproducts: [],
     orderItems:[],
-    orderCounter: '',
+    orderCounter: [],
     types: ['Offense', 'Utility', 'Healing',  'Wet'],
     rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Equipment', 'Lunar', 'Fesh'],
   },
   mutations: {
     addCheckoutItem:(state, products, orderCounter) => {
       dbOrders.add({
-        orderNumber: 2,
+        orderNumber: state.orderCounter,
         progress: "not started",
         orderLines: state.products
       })
@@ -100,15 +100,16 @@ export default new Vuex.Store({
       dbCounter.onSnapshot((snapshotProducts) =>{
         orderCounter = []
         snapshotProducts.forEach((doc) => {
-          var orderNumber = doc.data();
+          var counter = doc.data();
           orderCounter.push({
             id: doc.id,
-            orderCounter: orderNumber,
+            orderNumber: counter.orderNumber,
           })
          
         })
+        
+        state.orderCounter = orderCounter.orderNumber
         console.log(orderCounter)
-        state.orderCounter = orderCounter
       }
       )
     },

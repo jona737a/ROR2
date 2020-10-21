@@ -275,7 +275,7 @@ export default {
 
         h2{
             font-size: 1vw;
-            width: 6vw;
+            width: 7vw;
             height: 3vw;
             font-weight: 400;
             align-self: center;
