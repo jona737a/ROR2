@@ -20,9 +20,9 @@ export default new Vuex.Store({
     rarities: ['Common', 'Uncommon', 'Legendary', 'Boss', 'Equipment', 'Lunar', 'Fesh'],
   },
   mutations: {
-    addCheckoutItem:(state, products, orderCounter) => {
+    addCheckoutItem:(state, products, orderCounter, orderNumber) => {
       dbOrders.add({
-        orderNumber: state.orderCounter,
+        orderNumber: state.orderCounter[0].orderNumber,
         progress: "not started",
         orderLines: state.products
       })
@@ -108,8 +108,8 @@ export default new Vuex.Store({
          
         })
         
-        state.orderCounter = orderCounter.orderNumber
-        console.log(orderCounter)
+        state.orderCounter = orderCounter
+        console.log(state.orderCounter[0].orderNumber)
       }
       )
     },

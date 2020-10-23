@@ -1,9 +1,9 @@
 <template>
     <div class="main">
-        <v-col cols="8" class="pa-0">
+        <v-col md="8" class="pa-0">
             <Items></Items>
         </v-col>
-        <v-col cols="4" class="pa-0">
+        <v-col md="4" class="pa-0">
             <Orders></Orders>
         </v-col>
     </div>
@@ -26,4 +26,6 @@ export default {
     .main{
         display: flex;
     }
+    
+    
 </style>

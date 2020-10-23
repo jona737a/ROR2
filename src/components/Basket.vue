@@ -59,6 +59,7 @@ export default {
 
     beforeCreate(){
         this.$store.dispatch('setOrderItems')
+        this.$store.dispatch('setOrderCounter')
     },
 
     methods:{
@@ -74,6 +75,7 @@ export default {
         
 
         checkOut(){
+            
             this.$store.dispatch('setCheckoutItems')
             this.staticBasket.splice(this.staticBasket)
             this.checkoutSuccess = true;
@@ -84,6 +86,9 @@ export default {
         staticBasket(){
            //return this.$store.state.basketItems
            return this.$store.getters.getBasketItems
+        },
+        counter(){
+           return this.$store.getters.getOrderCounter
         },
 
         

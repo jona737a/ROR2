@@ -22,7 +22,7 @@
                         <v-row class="order" v-for="order in orderItems" :key="order.id">
                             <v-col cols="4"><p class="text--text" style="text-align:right">Order Number:</p></v-col>
                             <v-col cols="4"><p class="text--text">{{order.orderNumber}}</p></v-col>
-                            <v-col cols="4"><div class="progress secondary"><p class="text--text">{{order.progress}}</p></div></v-col>
+                            <v-col cols="4"><div class="progress secondary" @click="switchState(order.id)"><p class="text--text">{{order.progress}}</p></div></v-col>
                             <v-col cols="4"><p class="text--text" style="text-align:right">Order items:</p></v-col>
                             <v-col cols="4">
                                 <p class="text--text" v-for="(item, index) in order.orderLines" :key="index">{{item.quantity}} x {{item.name}}</p>
@@ -55,18 +55,28 @@ export default {
         }
     },
     beforeCreate(){
-        this.$store.dispatch('setOrderCounter')
+        
     },
     computed:{
         orderItems(){
            return this.$store.getters.getOrderItems
         },
-        counter(){
-             
-           return this.$store.getters.getOrderCounter
-        },
+        
     },
     methods:{
+        switchState(id){
+            let selectedOrderItem = this.orderItems.filter(item => item.id === id)[0];
+
+            if(selectedOrderItem.progress === "not started"){
+                dbOrders.doc(id).update({progress:"in progress"}).then(()=>{})
+            }
+            else if(selectedOrderItem.progress === "in progress"){
+                dbOrders.doc(id).update({progress:"complete"}).then(()=>{})
+            }
+            else if(selectedOrderItem.progress === "complete"){
+                dbOrders.doc(id).update({progress:"in progress"}).then(()=>{})
+            }
+        },
         deleteOrder(id){
             dbOrders.doc(id).delete().then(()=>{
                 //console.log("Document successfully deleted");
