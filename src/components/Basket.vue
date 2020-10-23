@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { dbCounter } from '../../firebase'
 export default {
     data(){
         return{
@@ -73,12 +74,22 @@ export default {
             item.quantity++
         },
         
-
-        checkOut(){
-            
+        log(){
+            console.log(this.counter[0].orderNumber)
             this.$store.dispatch('setCheckoutItems')
             this.staticBasket.splice(this.staticBasket)
             this.checkoutSuccess = true;
+        },
+
+        checkOut(){
+            let test = this.counter[0].orderNumber + 1
+            
+            dbCounter.doc(this.counter[0].id).update({orderNumber: test}).then(()=>{
+                this.$store.dispatch('setCheckoutItems')
+                this.staticBasket.splice(this.staticBasket)
+                this.checkoutSuccess = true;
+            })
+            
         },
     },
     computed:{

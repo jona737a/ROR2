@@ -109,7 +109,7 @@ export default new Vuex.Store({
         })
         
         state.orderCounter = orderCounter
-        console.log(state.orderCounter[0].orderNumber)
+        
       }
       )
     },
