@@ -19,8 +19,8 @@
                 </v-row>
                 <v-row>
                     <v-col class="orderlist tertiary">
-                        <v-row class="order" v-for="order in orderItems" :key="order.id">
-                            <v-col cols="4"><p class="text--text" style="text-align:right">Order Number:</p></v-col>
+                        <v-row class="order" v-for="order in orderItems" :key="order.id" >
+                            <v-col cols="4"  ><p class="text--text" style="text-align:right">Order Number:</p></v-col>
                             <v-col cols="4"><p class="text--text">{{order.orderNumber}}</p></v-col>
                             <v-col cols="4"><div class="progress secondary" @click="switchState(order.id)"><p class="text--text">{{order.progress}}</p></div></v-col>
                             <v-col cols="4"><p class="text--text" style="text-align:right">Order items:</p></v-col>
@@ -28,9 +28,11 @@
                                 <p class="text--text" v-for="(item, index) in order.orderLines" :key="index">{{item.quantity}} x {{item.name}}</p>
                                 
                             </v-col>
-                            <v-col cols="4" >
+                            <v-col cols="4" class="pl-13">
                                 <v-icon @click="deleteOrder(order.id)" color="primary">delete</v-icon>
+                                
                             </v-col>
+                            <v-col cols="8" offset="3"><h2 class="text--text">Total price: {{order.sum}} $</h2></v-col>
                         </v-row>
                         
                         
@@ -52,6 +54,7 @@ export default {
         return{
             deletedSuccess: false,
             deletedText: "Order has been deleted",
+            totalCost:[],
         }
     },
     beforeCreate(){
@@ -64,6 +67,8 @@ export default {
         
     },
     methods:{
+        
+        
         switchState(id){
             let selectedOrderItem = this.orderItems.filter(item => item.id === id)[0];
 

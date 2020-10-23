@@ -21,10 +21,18 @@ export default new Vuex.Store({
   },
   mutations: {
     addCheckoutItem:(state, products, orderCounter, orderNumber) => {
+      var totalCost = 0;
+      
+      for (var items in state.products) {
+          var individualItem = state.products[items];
+          totalCost += individualItem.quantity * individualItem.price;
+      }
+
       dbOrders.add({
         orderNumber: state.orderCounter[0].orderNumber,
         progress: "not started",
-        orderLines: state.products
+        orderLines: state.products,
+        sum: totalCost,
       })
     },
     addBasketItems: (state, products) => {
@@ -87,6 +95,7 @@ export default new Vuex.Store({
             orderNumber: orderItemData.orderNumber,
             progress: orderItemData.progress,
             orderLines: orderItemData.orderLines,
+            sum: orderItemData.sum,
           })
         })
        

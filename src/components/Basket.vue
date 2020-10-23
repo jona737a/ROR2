@@ -74,12 +74,6 @@ export default {
             item.quantity++
         },
         
-        log(){
-            console.log(this.counter[0].orderNumber)
-            this.$store.dispatch('setCheckoutItems')
-            this.staticBasket.splice(this.staticBasket)
-            this.checkoutSuccess = true;
-        },
 
         checkOut(){
             let test = this.counter[0].orderNumber + 1
