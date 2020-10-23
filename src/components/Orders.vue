@@ -18,7 +18,7 @@
                     <v-spacer></v-spacer>
                 </v-row>
                 <v-row>
-                    <v-col class="orderlist tertiary">
+                    <v-col class="orderlist tertiary overflow-y-auto">
                         <v-row class="order" v-for="order in orderItems" :key="order.id" >
                             <v-col cols="4"  ><p class="text--text" style="text-align:right">Order Number:</p></v-col>
                             <v-col cols="4"><p class="text--text">{{order.orderNumber}}</p></v-col>
@@ -119,7 +119,7 @@ export default {
     }
     
     .orderlist{
-        
+        max-height: 69vh;
         .order{
             border-bottom: 0.2vw solid var(--v-text-base);
             border-color: var(--v-text-base) !important;
